@@ -22,8 +22,7 @@ app = typer.Typer(add_completion=False)
 
 def _typed_command(*args: Any, **kwargs: Any) -> Callable[[Callable[..., R]], Callable[..., R]]:
     def decorator(func: Callable[..., R]) -> Callable[..., R]:
-        command = app.command(*args, **kwargs)(func)
-        return cast(Callable[..., R], command)
+        return app.command(*args, **kwargs)(func)
 
     return decorator
 
