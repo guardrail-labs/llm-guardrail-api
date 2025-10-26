@@ -1,0 +1,11 @@
+site_name: Guardrail API
+theme:
+  name: material
+nav:
+  - Home: index.md
+  - Install: INSTALL_ENTERPRISE.md
+  - Operations: OPERATIONS_QUICKSTART.md
+  - Admin: admin_guide.md
+  - Verify: RELEASE_VERIFY.md
+  - GA Notes: GA_RELEASE_NOTES.md
+docs_dir: docs

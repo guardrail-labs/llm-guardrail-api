@@ -1,0 +1,32 @@
+name: Docs (MkDocs)
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "docs/**"
+      - "mkdocs.yml"
+      - "README.md"
+  workflow_dispatch:
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install mkdocs
+        run: pip install mkdocs mkdocs-material
+      - name: Build
+        run: mkdocs build -d site
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - name: Deploy to Pages
+        uses: actions/deploy-pages@v4

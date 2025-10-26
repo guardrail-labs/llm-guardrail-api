@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: guardrailapi
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: guardrailapi
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 8080
