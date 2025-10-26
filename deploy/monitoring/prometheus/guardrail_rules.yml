@@ -1,0 +1,29 @@
+groups:
+  - name: guardrail-unicode-detector
+    rules:
+      - alert: GuardrailUnicodeMixedScriptSpike
+        expr: sum(rate(unicode_mixed_script_total[10m])) by (tenant) > 5
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Mixed-script detections spiking for {{ $labels.tenant }}"
+          description: "Potential homoglyph phishing/spoof attempts."
+
+      - alert: GuardrailUnicodeConfusableHigh
+        expr: avg_over_time(unicode_confusable_ratio[15m]) by (tenant) > 0.08
+        for: 15m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High confusable ratio"
+          description: "Confusables > 8% on average over 15m."
+
+      - alert: GuardrailUnicodeZeroWidthBurst
+        expr: sum(rate(unicode_zero_width_total[5m])) by (tenant) > 50
+        for: 10m
+        labels:
+          severity: info
+        annotations:
+          summary: "Zero-width characters burst"
+          description: "Spike of zero-widths (hidden text / bidi control attempts)."

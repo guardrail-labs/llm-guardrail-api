@@ -1,3 +1,9 @@
+# pyproject.toml
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "guardrailctl"
 version = "0.1.0"
@@ -5,12 +11,9 @@ description = "Installer & deployment helper for Guardrail API (Enterprise & Cor
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = ["typer>=0.12", "requests>=2.32", "PyYAML>=6.0", "jinja2>=3.1"]
+
 [project.scripts]
 guardrailctl = "guardrailctl.__main__:main"
-
-[build-system]
-requires = ["setuptools>=61", "wheel"]
-build-backend = "setuptools.build_meta"
 
 [tool.ruff]
 line-length = 100
@@ -20,6 +23,27 @@ target-version = "py311"
 python_version = "3.11"
 strict = true
 
-[[tool.mypy.overrides]]
-module = ["requests", "typer", "yaml", "jinja2"]
-ignore_missing_imports = true
+# ⬇️ Tell setuptools to package ONLY guardrailctl (and not app/, deploy/, starlette/, etc.)
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["guardrailctl*"]
+exclude = ["app*", "deploy*", "starlette*"]
+
+# ⬇️ Include templates and channels.yaml inside the wheel/editable install
+[tool.setuptools.package-data]
+guardrailctl = ["templates/**", "channels.yaml"]
+
+# Optional but explicit
+[tool.setuptools]
+include-package-data = true
+
+[project.optional-dependencies]
+dev = [
+  "ruff",
+  "mypy",
+  "types-requests",
+  "types-PyYAML",
+  "build",
+]
+
+
