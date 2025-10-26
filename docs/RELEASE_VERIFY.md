@@ -13,14 +13,14 @@ Use this runbook to validate Guardrail API release artifacts.
    ```bash
    guardrailctl channels list
    ```
-2. Verify checksum integrity:
+2. Verify checksum integrity, including the SOC2 bundle for Enterprise builds:
    ```bash
-   guardrailctl verify --edition enterprise --tag v1.0.0-GA
+   guardrailctl verify --edition enterprise --tag v1.0.0-GA --soc2
    guardrailctl verify --edition core --tag v1.0.0-GA
    ```
-3. Perform a clean install to a temporary directory and run smoke tests:
+3. Stage the release into a scratch directory and run smoke tests:
    ```bash
-   guardrailctl install --edition enterprise --tag v1.0.0-GA --dest /tmp/guardrail-test
+   guardrailctl upgrade --edition enterprise --tag v1.0.0-GA --from /tmp/guardrail-test
    docker compose -f /tmp/guardrail-test/docker-compose.yaml config
    ```
 4. Document verification results and attach logs to the release ticket.

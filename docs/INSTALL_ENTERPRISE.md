@@ -18,18 +18,43 @@ This guide walks through installing Guardrail API Enterprise via the `guardrailc
    ```bash
    export GH_TOKEN=ghp_yourtoken
    ```
-3. Verify the target release:
+3. Verify the target release (include `--soc2` if you need the audit bundle):
    ```bash
-   guardrailctl verify --edition enterprise --tag v1.0.0-GA
+   guardrailctl verify --edition enterprise --tag v1.0.0-GA --soc2
    ```
-4. Install the release to the destination path:
+4. Perform an in-place upgrade. This stages the new release and atomically flips the `current` symlink:
    ```bash
-   guardrailctl install --edition enterprise --tag v1.0.0-GA --dest /opt/guardrail
+   guardrailctl upgrade \
+     --edition enterprise \
+     --tag v1.0.0-GA \
+     --from /opt/guardrail
    ```
-5. Initialize Docker Compose assets and start the stack:
+   Check the active release at any time with `guardrailctl current`.
+5. Initialize Docker Compose assets and start the stack. Use `--profile full` to add Prometheus and Grafana stubs:
    ```bash
-   guardrailctl compose init --dest /opt/guardrail
+   guardrailctl compose init --profile full --dest /opt/guardrail
+   guardrailctl compose env --write --dest /opt/guardrail
    docker compose -f /opt/guardrail/docker-compose.yaml up -d
    ```
 
-For Kubernetes clusters, use `guardrailctl helm render --out ./manifests` and apply the manifests with `kubectl`.
+For Kubernetes clusters, render manifests with merged values and apply them with `kubectl`:
+
+```bash
+guardrailctl helm render --values ./my-values.yaml --out ./manifests
+kubectl apply -f ./manifests
+```
+
+## Tenant bootstrap
+
+After the API is running, seed the first tenant and admin user with the Admin API helpers:
+
+```bash
+guardrailctl tenant create --id default --admin-user admin@example.com \
+  --url http://localhost:8080 --token "$GUARDRAIL_TOKEN"
+```
+
+List tenants with either CLI flags or the `GUARDRAIL_URL`/`GUARDRAIL_TOKEN` environment variables:
+
+```bash
+guardrailctl tenant list --json
+```

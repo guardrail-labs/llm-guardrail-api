@@ -1,0 +1,10 @@
+Thank you for using guardrailctl!
+
+Next steps:
+  1. Inspect the rendered manifests under {{ output }}.
+  2. Apply them to your cluster:
+       kubectl apply -f {{ output }}
+  3. Watch the deployment:
+       kubectl get pods -l app=guardrailapi
+
+Remember to update secrets and persistent storage before going to production.
