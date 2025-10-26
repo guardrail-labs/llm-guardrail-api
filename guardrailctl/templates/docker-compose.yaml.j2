@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+  guardrail:
+    image: guardrailapi:1.0.0-ga
+    env_file: .env
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis

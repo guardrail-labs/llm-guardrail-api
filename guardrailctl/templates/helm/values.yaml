@@ -1,0 +1,9 @@
+image:
+  repository: guardrailapi
+  tag: "1.0.0-ga"
+service:
+  type: ClusterIP
+  port: 8080
+env:
+  GUARDRAIL_ENV: "prod"
+  REDIS_URL: "redis://redis:6379/0"

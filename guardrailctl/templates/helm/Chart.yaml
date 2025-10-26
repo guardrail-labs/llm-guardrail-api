@@ -1,0 +1,4 @@
+apiVersion: v2
+name: guardrailapi
+version: 0.1.0
+description: Guardrail API (starter chart)

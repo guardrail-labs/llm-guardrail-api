@@ -1,0 +1,13 @@
+channels:
+  enterprise:
+    owner: WesMilam
+    repo: llm-guardrail-api-enterprise
+    artifact: guardrailapi_${tag}.tgz
+    checksum: guardrailapi_${tag}.tgz.sha256
+    soc2_artifact: guardrailapi_soc2_${tag}.tgz
+    soc2_checksum: guardrailapi_soc2_${tag}.tgz.sha256
+  core:
+    owner: WesMilam
+    repo: llm-guardrail-api-next
+    artifact: guardrailapi_${tag}.tgz
+    checksum: guardrailapi_${tag}.tgz.sha256
