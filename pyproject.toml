@@ -36,3 +36,11 @@ guardrailctl = ["templates/**", "channels.yaml"]
 # Optional but explicit
 [tool.setuptools]
 include-package-data = true
+
+[project.optional-dependencies]
+dev = [
+  "ruff",
+  "mypy",
+  "types-requests",
+  "types-PyYAML",
+]
