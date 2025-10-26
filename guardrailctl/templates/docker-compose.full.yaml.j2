@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+  guardrail:
+    image: guardrailapi:1.0.0-ga
+    env_file: .env
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    depends_on:
+      - guardrail
+  grafana:
+    image: grafana/grafana:latest
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=change-me
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    volumes:
+      - grafana-data:/var/lib/grafana
+volumes:
+  grafana-data:

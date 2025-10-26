@@ -17,15 +17,19 @@ This quickstart outlines the operational workflows once Guardrail API is deploye
 
 ## Upgrading
 
-1. Verify the new release:
+1. Verify the new release (use `--soc2` when required for audits):
    ```bash
-   guardrailctl verify --edition enterprise --tag v1.1.0-GA
+   guardrailctl verify --edition enterprise --tag v1.1.0-GA --soc2
    ```
-2. Install to a staging directory:
+2. Upgrade in-place. The command downloads to a temp directory, verifies checksums, extracts into `/opt/guardrail/releases/<tag>`, then atomically moves the `current` symlink:
    ```bash
-   guardrailctl install --edition enterprise --tag v1.1.0-GA --dest /opt/guardrail-v1.1.0
+   guardrailctl upgrade --edition enterprise --tag v1.1.0-GA --from /opt/guardrail
    ```
-3. Drain traffic, swap symlinks or update Compose/Helm manifests, then restart services.
+3. Confirm the active build:
+   ```bash
+   guardrailctl current --root /opt/guardrail
+   ```
+4. Restart services (`docker compose` or Helm) to pick up the new release once you are ready to cut traffic over.
 
 ## Disaster Recovery
 
