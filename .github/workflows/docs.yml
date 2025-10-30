@@ -35,6 +35,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install mkdocs mkdocs-material
 
+      - name: Guardrail: disallow parent-directory links
+        run: bash tools/check_docs_links.sh
+
       - name: Build documentation
         run: mkdocs build --strict
 
