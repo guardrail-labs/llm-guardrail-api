@@ -1,11 +1,36 @@
-site_name: Guardrail API
+site_name: Guardrail API Documentation
+site_description: Umbrella documentation portal for Guardrail API runtime, policy packs, and operations.
+site_url: https://wesmilam.github.io/llm-guardrail-api/
+repo_url: https://github.com/WesMilam/llm-guardrail-api
+repo_name: llm-guardrail-api
+nav:
+  - Overview: index.md
+  - Quickstart: quickstart.md
+  - Architecture: architecture.md
+  - Tenants & RBAC: tenants-and-rbac.md
+  - Policy Packs: policy-packs.md
+  - Admin UI: admin-ui.md
+  - Verifier: verifier.md
+  - SOC 2 Evidence: soc2-evidence.md
+  - API Reference: api-reference.md
+  - Release Notes: release-notes.md
 theme:
   name: material
-nav:
-  - Home: index.md
-  - Install: INSTALL_ENTERPRISE.md
-  - Operations: OPERATIONS_QUICKSTART.md
-  - Admin: admin_guide.md
-  - Verify: RELEASE_VERIFY.md
-  - GA Notes: GA_RELEASE_NOTES.md
-docs_dir: docs
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - content.code.copy
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - tables
+  - pymdownx.superfences
+  - pymdownx.highlight
+plugins:
+  - search
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/WesMilam/llm-guardrail-api
+      name: GitHub

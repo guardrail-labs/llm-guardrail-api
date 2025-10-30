@@ -1,15 +1,32 @@
 # Guardrail API Umbrella Repository
 
-This repository is the home of Guardrail API. It provides:
+This repository contains the Guardrail API umbrella project. It publishes the MkDocs-based
+documentation portal, the `guardrailctl` CLI, and deployment templates used to bootstrap new
+environments.
 
-- `guardrailctl`: a Typer-based installer and deployment helper for Guardrail API Enterprise and Core.
-- Deployment templates for Docker Compose and Helm.
-- Public documentation published via GitHub Pages.
+## Repository layout
 
-The runtime releases live in dedicated repositories:
+The Guardrail platform is delivered through four coordinated repositories:
 
-- Enterprise: <https://github.com/WesMilam/llm-guardrail-api-enterprise>
-- Core: <https://github.com/WesMilam/llm-guardrail-api-next>
+1. **Umbrella & CLI (`llm-guardrail-api`)** – hosts the documentation portal, deployment
+   templates, and the `guardrailctl` installer used to interact with every other component.
+2. **Core Runtime (`llm-guardrail-api-next`)** – open-source runtime that powers policy
+   evaluation, inference mediation, and local development environments.
+3. **Enterprise Runtime (`llm-guardrail-api-enterprise`)** – hardened build with signed
+   artifacts, extended integrations, and SOC 2 controls for production deployments.
+4. **Policy Packs (`llm-guardrail-policy-packs`)** – curated rule bundles that encode Guardrail
+   best practices and can be promoted across tenants.
+
+Each repository publishes releases independently so teams can version runtimes, policy packs,
+and documentation on their own cadence. The umbrella CLI links them together by fetching
+channels, verifying artifacts, and rendering deployment assets.
+
+## Documentation portal
+
+The complete product documentation lives at
+[https://wesmilam.github.io/llm-guardrail-api/](https://wesmilam.github.io/llm-guardrail-api/).
+It covers installation, architecture, tenants and RBAC, policy pack workflows, the Admin UI,
+verifier usage, and SOC 2 evidence collection.
 
 ## Install the CLI
 
@@ -26,7 +43,7 @@ python -m pip install -U pip
 pip install -e .
 ```
 
-## Usage
+## Common commands
 
 List channels and verify releases:
 
@@ -45,7 +62,9 @@ Generate deployment assets:
 
 ```bash
 guardrailctl compose init --dest /opt/guardrail
+mkdir -p manifests
 guardrailctl helm render --out ./manifests
 ```
 
-Refer to the [documentation site](https://wesmilam.github.io/llm-guardrail-api/) for enterprise installation, operations, and release verification guides.
+Refer to the [documentation portal](https://wesmilam.github.io/llm-guardrail-api/) for
+end-to-end guides covering enterprise installation, operations, and release verification.
