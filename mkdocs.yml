@@ -30,6 +30,7 @@ markdown_extensions:
 plugins:
   - search
 extra:
+  version: "1.0.0"
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/WesMilam/llm-guardrail-api
