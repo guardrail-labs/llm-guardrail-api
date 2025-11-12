@@ -4,20 +4,18 @@ site_url: https://wesmilam.github.io/llm-guardrail-api/
 repo_url: https://github.com/WesMilam/llm-guardrail-api
 repo_name: llm-guardrail-api
 nav:
-  - Overview: index.md
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - Components:
+    - Core: components/core.md
+    - Enterprise: components/enterprise.md
+    - Verifier: components/verifier.md
+  - Policy Packs:
+    - Overview: policy-packs/index.md
+    - Schema: policy-packs/schema.md
+  - Troubleshooting: troubleshooting.md
   - About: about.md
   - Legal: legal.md
-  - Quickstart: quickstart.md
-  - Architecture: architecture.md
-  - Tenants & RBAC: tenants-and-rbac.md
-  - Policy Packs: policy-packs.md
-  - Admin UI: admin-ui.md
-  - Verifier: verifier.md
-  - SOC 2 Evidence: soc2-evidence.md
-  - Compliance:
-    - SBOM: compliance/sbom.md
-  - API Reference: api-reference.md
-  - Release Notes: release-notes.md
 theme:
   name: material
   features:
