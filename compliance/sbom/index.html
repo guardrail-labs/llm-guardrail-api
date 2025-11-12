@@ -10,28 +10,28 @@
       
       
       
-        <link rel="canonical" href="https://wesmilam.github.io/llm-guardrail-api/soc2-evidence/">
+        <link rel="canonical" href="https://wesmilam.github.io/llm-guardrail-api/compliance/sbom/">
       
       
-        <link rel="prev" href="../verifier/">
+        <link rel="prev" href="../../soc2-evidence/">
       
       
-        <link rel="next" href="../compliance/sbom/">
+        <link rel="next" href="../../api-reference/">
       
       
         
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
     
     
       
-        <title>SOC 2 Evidence - Guardrail API Docs</title>
+        <title>SBOM - Guardrail API Docs</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
       
       
 
@@ -50,7 +50,7 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#soc-2-evidence" class="md-skip">
+        <a href="#software-bill-of-materials-sbom" class="md-skip">
           Skip to content
         </a>
       
@@ -86,7 +86,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Guardrail API Docs" class="md-header__button md-logo" aria-label="Guardrail API Docs" data-md-component="logo">
+    <a href="../.." title="Guardrail API Docs" class="md-header__button md-logo" aria-label="Guardrail API Docs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              SOC 2 Evidence
+              SBOM
             
           </span>
         </div>
@@ -191,7 +191,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -210,7 +210,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../about/" class="md-tabs__link">
+      <a href="../../about/" class="md-tabs__link">
         
   
   
@@ -229,7 +229,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../legal/" class="md-tabs__link">
+      <a href="../../legal/" class="md-tabs__link">
         
   
   
@@ -248,7 +248,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../quickstart/" class="md-tabs__link">
+      <a href="../../quickstart/" class="md-tabs__link">
         
   
   
@@ -267,7 +267,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../architecture/" class="md-tabs__link">
+      <a href="../../architecture/" class="md-tabs__link">
         
   
   
@@ -286,7 +286,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../tenants-and-rbac/" class="md-tabs__link">
+      <a href="../../tenants-and-rbac/" class="md-tabs__link">
         
   
   
@@ -305,7 +305,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../policy-packs/" class="md-tabs__link">
+      <a href="../../policy-packs/" class="md-tabs__link">
         
   
   
@@ -324,7 +324,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../admin-ui/" class="md-tabs__link">
+      <a href="../../admin-ui/" class="md-tabs__link">
         
   
   
@@ -343,7 +343,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../verifier/" class="md-tabs__link">
+      <a href="../../verifier/" class="md-tabs__link">
         
   
   
@@ -360,11 +360,9 @@
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../../soc2-evidence/" class="md-tabs__link">
         
   
   
@@ -381,11 +379,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../compliance/sbom/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -403,7 +403,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../api-reference/" class="md-tabs__link">
+      <a href="../../api-reference/" class="md-tabs__link">
         
   
   
@@ -422,7 +422,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../release-notes/" class="md-tabs__link">
+      <a href="../../release-notes/" class="md-tabs__link">
         
   
   
@@ -457,7 +457,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Guardrail API Docs" class="md-nav__button md-logo" aria-label="Guardrail API Docs" data-md-component="logo">
+    <a href="../.." title="Guardrail API Docs" class="md-nav__button md-logo" aria-label="Guardrail API Docs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -487,7 +487,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -514,7 +514,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../about/" class="md-nav__link">
+      <a href="../../about/" class="md-nav__link">
         
   
   
@@ -541,7 +541,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../legal/" class="md-nav__link">
+      <a href="../../legal/" class="md-nav__link">
         
   
   
@@ -568,7 +568,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../quickstart/" class="md-nav__link">
+      <a href="../../quickstart/" class="md-nav__link">
         
   
   
@@ -595,7 +595,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../architecture/" class="md-nav__link">
+      <a href="../../architecture/" class="md-nav__link">
         
   
   
@@ -622,7 +622,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tenants-and-rbac/" class="md-nav__link">
+      <a href="../../tenants-and-rbac/" class="md-nav__link">
         
   
   
@@ -649,7 +649,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../policy-packs/" class="md-nav__link">
+      <a href="../../policy-packs/" class="md-nav__link">
         
   
   
@@ -676,7 +676,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../admin-ui/" class="md-nav__link">
+      <a href="../../admin-ui/" class="md-nav__link">
         
   
   
@@ -703,7 +703,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../verifier/" class="md-nav__link">
+      <a href="../../verifier/" class="md-nav__link">
         
   
   
@@ -727,37 +727,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    SOC 2 Evidence
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../soc2-evidence/" class="md-nav__link">
         
   
   
@@ -773,70 +746,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#evidence-bundle-overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Evidence bundle overview
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#operational-controls" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Operational controls
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#evidence-refresh-cadence" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Evidence refresh cadence
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#sharing-with-auditors" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Sharing with auditors
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -845,26 +754,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
         
           
-          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
             
   
   
@@ -882,7 +796,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
             
@@ -897,10 +811,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../compliance/sbom/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -916,6 +839,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -935,7 +859,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api-reference/" class="md-nav__link">
+      <a href="../../api-reference/" class="md-nav__link">
         
   
   
@@ -962,7 +886,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../release-notes/" class="md-nav__link">
+      <a href="../../release-notes/" class="md-nav__link">
         
   
   
@@ -1002,58 +926,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#evidence-bundle-overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Evidence bundle overview
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#operational-controls" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Operational controls
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#evidence-refresh-cadence" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Evidence refresh cadence
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#sharing-with-auditors" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Sharing with auditors
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1072,50 +944,12 @@
   
 
 
-<h1 id="soc-2-evidence">SOC 2 Evidence<a class="headerlink" href="#soc-2-evidence" title="Permanent link">&para;</a></h1>
-<p>Guardrail API ships with tooling and documentation to simplify SOC 2 audits. This page
-explains where to find required evidence and how to keep it current.</p>
-<h2 id="evidence-bundle-overview">Evidence bundle overview<a class="headerlink" href="#evidence-bundle-overview" title="Permanent link">&para;</a></h2>
-<p>The verifier produces an evidence bundle each time you validate a runtime release or policy
-pack. The bundle contains:</p>
-<ul>
-<li>Signed attestation describing build provenance and release metadata.</li>
-<li>CycloneDX SBOMs for every container and policy artifact.</li>
-<li>Hash manifest summarizing digests validated during verification.</li>
-<li><code>report.md</code> outlining the verification steps, timestamp, and operator identity.</li>
-</ul>
-<p>Store bundles in a dedicated GRC repository or ticketing system. Tag releases with the change
-request ID to make retrieval easy during audits.</p>
-<h2 id="operational-controls">Operational controls<a class="headerlink" href="#operational-controls" title="Permanent link">&para;</a></h2>
-<p>To demonstrate SOC 2 operational controls:</p>
-<ol>
-<li><strong>Change Management</strong> – Attach verifier reports to deployment tickets and capture approval
-   from the required reviewers inside the Admin UI.</li>
-<li><strong>Access Reviews</strong> – Export RBAC assignments from the Admin UI or API. The <code>guardrailctl</code>
-   CLI supports CSV exports you can hand to auditors.</li>
-<li><strong>Monitoring</strong> – Stream decision logs and administrative events into your SIEM. Retain logs
-   for at least one year or your policy requirement.</li>
-<li><strong>Incident Response</strong> – Document runbooks in your operations knowledge base. Link incidents
-   to affected policy packs and note remediation steps.</li>
-</ol>
-<h2 id="evidence-refresh-cadence">Evidence refresh cadence<a class="headerlink" href="#evidence-refresh-cadence" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Quarterly</strong> – Re-run the verifier on all production runtimes and packs. Confirm SBOM
-  dependencies have no outstanding critical vulnerabilities.</li>
-<li><strong>Annually</strong> – Rotate signing keys, review tenant access, and update incident response
-  exercises.</li>
-<li><strong>On Change</strong> – Whenever a runtime or pack changes, capture a new evidence bundle and attach
-  it to the corresponding change request.</li>
-</ul>
-<h2 id="sharing-with-auditors">Sharing with auditors<a class="headerlink" href="#sharing-with-auditors" title="Permanent link">&para;</a></h2>
-<p>When auditors request evidence, provide:</p>
-<ul>
-<li>The zipped verifier bundle for the requested release.</li>
-<li>A screenshot or exported report from the Admin UI showing the approval trail.</li>
-<li>Links to monitoring dashboards that visualize guardrail decision logs.</li>
-</ul>
-<p>These assets demonstrate that Guardrail maintains continuous compliance and that every release
-is governed by rigorous verification.</p>
+<h1 id="software-bill-of-materials-sbom">Software Bill of Materials (SBOM)<a class="headerlink" href="#software-bill-of-materials-sbom" title="Permanent link">&para;</a></h1>
+<p>SBOMs are generated in CI at release and attached to GitHub Releases for:
+- Core Runtime
+- Enterprise Admin Console
+- Verifier Microservice</p>
+<p>Use these SBOMs for supplier risk reviews and compliance audits.</p>
 
 
 
@@ -1153,10 +987,10 @@ is governed by rigorous verification.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "content.code.copy"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": "1.0.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "content.code.copy"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": "1.0.0"}</script>
     
     
-      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
       
     
   </body>
