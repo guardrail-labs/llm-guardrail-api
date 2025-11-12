@@ -1,0 +1,27 @@
+name: examples-smoke
+on:
+  pull_request:
+  workflow_dispatch: {}
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start stack
+        run: docker compose -f examples/docker-compose.yml up -d
+      - name: Wait for health
+        run: |
+          for i in {1..30}; do
+            ok=1
+            for u in 8080 8081 8082; do
+              curl -fsS "http://127.0.0.1:${u}/healthz" >/dev/null || ok=0
+            done
+            [ $ok -eq 1 ] && exit 0
+            sleep 2
+          done
+          echo "services not healthy" && docker compose -f examples/docker-compose.yml logs && exit 1
+      - name: Smoke
+        run: bash examples/smoke.sh
+      - name: Teardown
+        if: always()
+        run: docker compose -f examples/docker-compose.yml down -v
