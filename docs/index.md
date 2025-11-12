@@ -1,6 +1,11 @@
 # Guardrail API — Docs Portal
 
-{% include_relative _includes/versions.md %}
+Welcome to the Guardrail API umbrella documentation. This site brings together the
+operational guidance, architectural background, and governance controls that underpin the
+Guardrail platform. Use the navigation to explore the runtime, policy packs, verifier
+workflow, and supporting assets maintained across the Guardrail repositories.
+
+**Versions:** Core `1.5.0` • Enterprise `1.4.0` • Verifier `0.2.0` • Policy Packs `1.0.0`
 
 - **What is Guardrail?** A real-time safety & compliance firewall for LLMs with clarify-first policy enforcement.
 - **Components**
