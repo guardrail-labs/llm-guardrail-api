@@ -1,3 +1,5 @@
+> Guardrail Labs, LLC — Patent Pending
+
 # Core Runtime (v1.5.0)
 
 - **Purpose:** Enforcement engine (ingress/egress), policy execution, audit events.

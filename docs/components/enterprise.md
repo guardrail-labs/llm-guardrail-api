@@ -1,3 +1,5 @@
+> Guardrail Labs, LLC — Patent Pending
+
 # Enterprise Admin Console (v1.4.0)
 
 - **Purpose:** Multi-tenant admin, compliance registry, observability.

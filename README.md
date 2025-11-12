@@ -6,6 +6,8 @@
 ![Verifier](https://img.shields.io/badge/Verifier-0.2.0-green)
 ![Policy Packs](https://img.shields.io/badge/Policy_Packs-1.0.0-green)
 
+> Guardrail Labs, LLC — Patent Pending
+
 See **versions:** {% include_relative docs/_includes/versions.md %}
 
 This repository contains the Guardrail API umbrella project. It publishes the MkDocs-based
