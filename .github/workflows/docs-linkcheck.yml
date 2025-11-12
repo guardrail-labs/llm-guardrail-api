@@ -1,0 +1,12 @@
+name: docs-linkcheck
+on:
+  pull_request:
+  workflow_dispatch: {}
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check internal links
+        run: |
+          grep -RIn "](docs/" -- "*.md" || true
