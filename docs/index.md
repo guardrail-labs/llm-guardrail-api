@@ -1,42 +1,29 @@
-# Guardrail API Documentation Portal
+# Guardrail API — Docs Portal
 
-Welcome to the Guardrail API umbrella documentation. This site brings together the
-operational guidance, architectural background, and governance controls that underpin the
-Guardrail platform. Use the navigation to explore the runtime, policy packs, verifier
-workflow, and supporting assets maintained across the Guardrail repositories.
+{% include_relative _includes/versions.md %}
 
-Guardrail API is delivered as a family of components:
+- **What is Guardrail?** A real-time safety & compliance firewall for LLMs with clarify-first policy enforcement.
+- **Components**
+  - [Core Runtime](components/core.md)
+  - [Enterprise Admin Console](components/enterprise.md)
+  - [Verifier Microservice](components/verifier.md)
+  - [Policy Packs](policy-packs/index.md)
 
-* **Guardrail API Core** – the open-source runtime for policy evaluation and inference
-  mediation.
-* **Guardrail API Enterprise** – the hardened, SOC 2 aligned distribution with production
-  deployment assets and support integrations.
-* **Guardrail Admin UI** – the management console for configuring tenants, roles, policy
-  packs, and deployment metadata.
-* **Guardrail Policy Packs** – curated, versioned policy collections that can be installed
-  into any Guardrail environment.
+## Clarify-First Architecture (dual-arm)
+```mermaid
+flowchart LR
+  U[User/Client] -->|Prompt| IN[Ingress Arm<br/>Sanitize + Classify]
+  IN -->|Unclear| VF[Verifier<br/>assess-only]
+  VF -->|Clarify/Block/Allow| IN
+  IN -->|Safe| LLM[(LLM)]
+  LLM --> EG[Egress Arm<br/>Filter + Redact]
+  EG -->|Response| U
+```
 
-The sections below highlight the documentation you are most likely to need first.
+Ingress isolates inbound threats (prompt injection, confusables) and routes ambiguous intent to Verifier.
 
-## Get started quickly
+Verifier is assess-only (never executes user code); fails closed with provider fallback.
 
-* Read the [Quickstart](quickstart.md) to install the CLI, bootstrap an environment, and
-  deploy your first policy pack.
+Egress protects outputs (data exfiltration, PHI/PII leaks) even if ingress is degraded (dual-arm decoupling).
 
-## Learn more about the platform
-
-* Dive into the [Architecture](architecture.md) to understand the service layout and how
-  the components interact.
-* Review [Tenants & RBAC](tenants-and-rbac.md) for a complete view of access control
-  across organizations, workspaces, and service accounts.
-* Familiarize yourself with the [Verifier](verifier.md) when you need to validate releases
-  before promoting them to production.
-
-## Stay current
-
-* Reference the [API surface](api-reference.md) for programmatic integration.
-* Consult the [Release Notes](release-notes.md) for the latest changes across the Guardrail
-  stack.
-
-If you are looking for an enterprise support plan or have compliance questions, contact
-Guardrail via your standard support channels.
+---
