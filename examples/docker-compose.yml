@@ -1,0 +1,29 @@
+services:
+  core:
+    image: ghcr.io/wesmilam/guardrail-core:1.5.0
+    ports: ["8080:8080"]
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://core:8080/healthz"]
+      interval: 10s
+      timeout: 2s
+      retries: 10
+
+  enterprise:
+    image: ghcr.io/wesmilam/guardrail-enterprise:1.4.0
+    ports: ["8081:8081"]
+    depends_on:
+      - core
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://enterprise:8081/healthz"]
+      interval: 10s
+      timeout: 2s
+      retries: 10
+
+  verifier:
+    image: ghcr.io/wesmilam/guardrail-verifier:0.2.0
+    ports: ["8082:8082"]
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://verifier:8082/healthz"]
+      interval: 10s
+      timeout: 2s
+      retries: 10
