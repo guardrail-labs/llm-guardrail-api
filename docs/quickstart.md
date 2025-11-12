@@ -1,84 +1,43 @@
-# Quickstart
+# Quickstart — Hello Guardrail
 
-Follow this guide to stand up a Guardrail API environment in minutes. The steps focus on the
-`guardrailctl` CLI that ships from this umbrella repository and can be adapted for Core or
-Enterprise deployments.
+Spin up the Guardrail Core, Enterprise, and Verifier services locally and confirm that the
+basics respond as expected.
 
-## Prerequisites
+## Prereqs
+- Docker (or podman with the `docker` alias)
+- curl
+- jq (for inspecting the OpenAPI document)
 
-* Python 3.11 or newer.
-* Access to the Guardrail container registry (Enterprise customers) or the public images
-  published for the Core edition.
-* A workstation with Docker installed if you plan to use the provided Compose bundle.
-* Optional: kubectl and Helm if targeting Kubernetes.
-
-## Install the CLI
-
+## Start services
 ```bash
-python -m pip install --upgrade pip
-pip install guardrailctl
+docker run -d --rm --name guardrail-core -p 8080:8080 \
+  ghcr.io/guardrail-labs/guardrail-core:1.5.0
+docker run -d --rm --name guardrail-enterprise -p 8081:8081 \
+  ghcr.io/guardrail-labs/guardrail-enterprise:1.4.0
+docker run -d --rm --name guardrail-verifier -p 8082:8082 \
+  ghcr.io/guardrail-labs/guardrail-verifier:0.2.0
 ```
 
-To track the latest changes from the main branch you can install directly from GitHub:
-
+## Health checks
 ```bash
-pipx install git+https://github.com/WesMilam/llm-guardrail-api.git
+curl -sS http://127.0.0.1:8080/healthz
+curl -sS http://127.0.0.1:8081/healthz
+curl -sS http://127.0.0.1:8082/healthz
 ```
 
-Confirm the CLI is available:
-
+## Metrics checks
 ```bash
-guardrailctl --version
+curl -sS http://127.0.0.1:8080/metrics | head
+curl -sS http://127.0.0.1:8081/metrics | head
+curl -sS http://127.0.0.1:8082/metrics | head
 ```
 
-## Discover available releases
-
-Guardrail distributes both Core and Enterprise channels. View the available builds with:
-
+## OpenAPI presence
 ```bash
-guardrailctl channels list
+curl -sS http://127.0.0.1:8080/openapi.json | jq '.info.version'
+curl -sS http://127.0.0.1:8081/openapi.json | jq '.info.version'
 ```
 
-Use the edition and tag columns when selecting a release for deployment or verification.
-
-## Verify an artifact before deployment
-
-Every Enterprise artifact is signed. Validate a candidate release prior to rolling it out:
-
-```bash
-guardrailctl verify --edition enterprise --tag v1.0.0-GA
-```
-
-Verification writes a signed SBOM and attestation bundle to the current directory. Store the
-outputs with your change request for traceability.
-
-## Install to a target directory
-
-Create a working directory for the runtime and unpack the selected channel:
-
-```bash
-mkdir -p /opt/guardrail
-cd /opt/guardrail
-guardrailctl install --edition enterprise --tag v1.0.0-GA --dest .
-```
-
-The CLI lays down the runtime binaries, configuration stubs, and policy-pack manifest needed
-by Compose, Helm, or custom automation.
-
-## Generate deployment assets
-
-Choose the deployment model that fits your environment. The CLI can render both Docker
-Compose and Helm manifests.
-
-```bash
-# Docker Compose assets
-guardrailctl compose init --dest ./compose
-
-# Kubernetes manifests
-mkdir -p manifests
-guardrailctl helm render --out ./manifests
-```
-
-Review the generated files and commit them to your infrastructure repository. After you roll
-out the services, continue to the [Policy Packs](policy-packs.md) page to populate the
-runtime with guardrails tailored to your use cases.
+## Note
+- Versions used above: Core `1.5.0`, Enterprise `1.4.0`, Verifier `0.2.0`.
+- If you change ports or run behind a proxy, update the curl targets accordingly.

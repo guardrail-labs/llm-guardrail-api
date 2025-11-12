@@ -7,6 +7,9 @@ workflow, and supporting assets maintained across the Guardrail repositories.
 
 **Versions:** Core `1.5.0` • Enterprise `1.4.0` • Verifier `0.2.0` • Policy Packs `1.0.0`
 
+- 👉 Start here: [Quickstart](quickstart.md)
+- See also: [Troubleshooting](troubleshooting.md)
+
 **Guardrail Labs, LLC — Patent Pending**
 
 ## Clarify-First Architecture
