@@ -2,13 +2,21 @@ name: examples-smoke
 on:
   pull_request:
   workflow_dispatch: {}
+permissions:
+  contents: read
+  packages: read
 jobs:
   run:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        run: echo "${{ github.token }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
       - name: Start stack
         run: docker compose -f examples/docker-compose.yml up -d
+
       - name: Wait for health
         run: |
           for i in {1..30}; do
@@ -20,8 +28,10 @@ jobs:
             sleep 2
           done
           echo "services not healthy" && docker compose -f examples/docker-compose.yml logs && exit 1
+
       - name: Smoke
         run: bash examples/smoke.sh
+
       - name: Teardown
         if: always()
         run: docker compose -f examples/docker-compose.yml down -v
