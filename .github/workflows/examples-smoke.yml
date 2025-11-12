@@ -1,0 +1,64 @@
+name: examples-smoke
+
+on:
+  pull_request:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  run:
+    # Run for workflow_dispatch, or internal PRs (not forks)
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork == false) }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to GHCR (read-only)
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.GHCR_READ_USER }}
+          password: ${{ secrets.GHCR_READ_PAT }}
+
+      - name: Pre-pull images
+        run: |
+          set -euo pipefail
+          for img in \
+            ghcr.io/guardrail-labs/guardrail-core:1.5.0 \
+            ghcr.io/guardrail-labs/guardrail-enterprise:1.4.0 \
+            ghcr.io/guardrail-labs/guardrail-verifier:0.2.0 \
+          ; do
+            echo "Pulling $img"
+            docker pull "$img"
+          done
+
+      - name: Start stack
+        run: docker compose -f examples/docker-compose.yml up -d
+
+      - name: Wait for health
+        run: |
+          set -euo pipefail
+          for i in {1..30}; do
+            ok=1
+            for u in 8080 8081 8082; do
+              curl -fsS "http://127.0.0.1:${u}/healthz" >/dev/null || ok=0
+            done
+            if [ $ok -eq 1 ]; then
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "services not healthy"
+          docker compose -f examples/docker-compose.yml ps
+          docker compose -f examples/docker-compose.yml logs
+          exit 1
+
+      - name: Smoke
+        run: bash examples/smoke.sh
+
+      - name: Teardown
+        if: always()
+        run: docker compose -f examples/docker-compose.yml down -v
