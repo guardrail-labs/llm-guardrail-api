@@ -22,6 +22,7 @@ nav:
       - SBOM: compliance/sbom.md
   - API:
       - Reference: api-reference.md
+      - Summary: api/summary.md
   - Release Notes: release-notes.md
   - About: about.md
   - Legal: legal.md
