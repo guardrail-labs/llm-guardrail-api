@@ -10,28 +10,24 @@
       
       
       
-        <link rel="canonical" href="https://wesmilam.github.io/llm-guardrail-api/verifier/">
+        <link rel="canonical" href="https://wesmilam.github.io/llm-guardrail-api/components/core/">
       
       
-        <link rel="prev" href="../admin-ui/">
-      
-      
-        <link rel="next" href="../soc2-evidence/">
       
       
         
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
     
     
       
-        <title>Verifier - Guardrail API Documentation</title>
+        <title>Core Runtime (v1.5.0) - Guardrail API Documentation</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
       
       
 
@@ -50,7 +46,7 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -68,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#verifier" class="md-skip">
+        <a href="#core-runtime-v150" class="md-skip">
           Skip to content
         </a>
       
@@ -86,7 +82,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Guardrail API Documentation" class="md-header__button md-logo" aria-label="Guardrail API Documentation" data-md-component="logo">
+    <a href="../.." title="Guardrail API Documentation" class="md-header__button md-logo" aria-label="Guardrail API Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -106,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Verifier
+              Core Runtime (v1.5.0)
             
           </span>
         </div>
@@ -191,7 +187,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -210,7 +206,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../quickstart/" class="md-tabs__link">
+      <a href="../../quickstart/" class="md-tabs__link">
         
   
   
@@ -229,7 +225,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../architecture/" class="md-tabs__link">
+      <a href="../../architecture/" class="md-tabs__link">
         
   
   
@@ -248,7 +244,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../tenants-and-rbac/" class="md-tabs__link">
+      <a href="../../tenants-and-rbac/" class="md-tabs__link">
         
   
   
@@ -267,7 +263,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../policy-packs/" class="md-tabs__link">
+      <a href="../../policy-packs/" class="md-tabs__link">
         
   
   
@@ -286,7 +282,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../admin-ui/" class="md-tabs__link">
+      <a href="../../admin-ui/" class="md-tabs__link">
         
   
   
@@ -303,11 +299,9 @@
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../../verifier/" class="md-tabs__link">
         
   
   
@@ -326,7 +320,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../soc2-evidence/" class="md-tabs__link">
+      <a href="../../soc2-evidence/" class="md-tabs__link">
         
   
   
@@ -345,7 +339,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../api-reference/" class="md-tabs__link">
+      <a href="../../api-reference/" class="md-tabs__link">
         
   
   
@@ -364,7 +358,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../release-notes/" class="md-tabs__link">
+      <a href="../../release-notes/" class="md-tabs__link">
         
   
   
@@ -399,7 +393,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Guardrail API Documentation" class="md-nav__button md-logo" aria-label="Guardrail API Documentation" data-md-component="logo">
+    <a href="../.." title="Guardrail API Documentation" class="md-nav__button md-logo" aria-label="Guardrail API Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -429,7 +423,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -456,7 +450,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../quickstart/" class="md-nav__link">
+      <a href="../../quickstart/" class="md-nav__link">
         
   
   
@@ -483,7 +477,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../architecture/" class="md-nav__link">
+      <a href="../../architecture/" class="md-nav__link">
         
   
   
@@ -510,7 +504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tenants-and-rbac/" class="md-nav__link">
+      <a href="../../tenants-and-rbac/" class="md-nav__link">
         
   
   
@@ -537,7 +531,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../policy-packs/" class="md-nav__link">
+      <a href="../../policy-packs/" class="md-nav__link">
         
   
   
@@ -564,7 +558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../admin-ui/" class="md-nav__link">
+      <a href="../../admin-ui/" class="md-nav__link">
         
   
   
@@ -588,37 +582,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Verifier
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../verifier/" class="md-nav__link">
         
   
   
@@ -634,81 +601,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#when-to-run-the-verifier" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        When to run the Verifier
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Requirements
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#running-the-verifier" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Running the verifier
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#automating-verification" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Automating verification
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -720,7 +612,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../soc2-evidence/" class="md-nav__link">
+      <a href="../../soc2-evidence/" class="md-nav__link">
         
   
   
@@ -747,7 +639,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api-reference/" class="md-nav__link">
+      <a href="../../api-reference/" class="md-nav__link">
         
   
   
@@ -774,7 +666,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../release-notes/" class="md-nav__link">
+      <a href="../../release-notes/" class="md-nav__link">
         
   
   
@@ -814,69 +706,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#when-to-run-the-verifier" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        When to run the Verifier
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Requirements
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#running-the-verifier" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Running the verifier
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#automating-verification" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Automating verification
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -895,47 +724,16 @@
   
 
 
-<h1 id="verifier">Verifier<a class="headerlink" href="#verifier" title="Permanent link">&para;</a></h1>
-<p>The Guardrail Verifier is a command-line workflow that validates runtime and policy pack
-artifacts before they are promoted to regulated environments. It provides cryptographic
-attestation, SBOM generation, and evidence packaging aligned with SOC 2 requirements.</p>
-<h2 id="when-to-run-the-verifier">When to run the Verifier<a class="headerlink" href="#when-to-run-the-verifier" title="Permanent link">&para;</a></h2>
+<h1 id="core-runtime-v150">Core Runtime (v1.5.0)<a class="headerlink" href="#core-runtime-v150" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Before promoting a new runtime release to staging or production.</li>
-<li>When adding or updating policy packs that contain new rules or dependencies.</li>
-<li>Prior to a quarterly SOC 2 control review to ensure evidence is complete.</li>
+<li><strong>Purpose:</strong> Enforcement engine (ingress/egress), policy execution, audit events.</li>
+<li><strong>Status:</strong> GA, feature-complete; patches/hotfixes only.</li>
+<li><strong>OpenAPI:</strong> exposed by core service at <code>/openapi.json</code> (CI smoke verified).</li>
 </ul>
-<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Access to the artifact registry that hosts Guardrail images or policy pack bundles.</li>
-<li>The <code>guardrailctl</code> CLI or standalone verifier binary.</li>
-<li>Trusted root certificates used to validate Guardrail signing keys.</li>
-</ul>
-<h2 id="running-the-verifier">Running the verifier<a class="headerlink" href="#running-the-verifier" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>guardrailctl<span class="w"> </span>verify<span class="w"> </span>--edition<span class="w"> </span>enterprise<span class="w"> </span>--tag<span class="w"> </span>v1.0.0-GA<span class="w"> </span>--output<span class="w"> </span>./evidence
-</code></pre></div>
-<p>The command performs the following checks:</p>
-<ol>
-<li>Downloads the manifest for the requested release.</li>
-<li>Validates container signatures and compares digests.</li>
-<li>Generates a CycloneDX SBOM for each artifact.</li>
-<li>Writes an attestation bundle (<code>attestation.json</code>) and summary report (<code>report.md</code>).</li>
-</ol>
-<p>The evidence directory can be uploaded to your change request ticket, stored in a GRC tool, or
-attached to an internal audit package.</p>
-<h2 id="automating-verification">Automating verification<a class="headerlink" href="#automating-verification" title="Permanent link">&para;</a></h2>
-<p>Integrate the verifier into CI/CD pipelines to block deployments when evidence is missing or
-signatures are invalid. The CLI exits with a non-zero status if any check fails, making it easy
-to wire into GitHub Actions, GitLab CI, or Jenkins pipelines.</p>
-<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Signature mismatch</strong> – Ensure your verifier has the latest Guardrail public keys. Rotate
-  keys annually and distribute them through your secrets manager.</li>
-<li><strong>Missing SBOM</strong> – Rebuild the artifact with the SBOM generation flag enabled. Enterprise
-  pipelines enforce this automatically.</li>
-<li><strong>Connectivity failures</strong> – If operating in a restricted network, mirror the artifacts to an
-  internal registry and point the verifier to the mirror URL.</li>
-</ul>
+<p><strong>Key Headers</strong>
+- <code>X-Guardrail-Decision</code> • <code>X-Guardrail-Mode</code> • <code>X-Guardrail-Incident-ID</code></p>
+<p><strong>Health &amp; Metrics</strong>
+- <code>/healthz</code> • <code>/metrics</code> (Prometheus exposition)</p>
 
 
 
@@ -998,10 +796,10 @@ to wire into GitHub Actions, GitLab CI, or Jenkins pipelines.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "content.code.copy"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": "1.0.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "content.code.copy"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": "1.0.0"}</script>
     
     
-      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
       
     
   </body>

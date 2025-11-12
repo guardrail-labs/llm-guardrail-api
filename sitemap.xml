@@ -2,42 +2,66 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://wesmilam.github.io/llm-guardrail-api/</loc>
-         <lastmod>2025-11-02</lastmod>
+         <lastmod>2025-11-12</lastmod>
     </url>
     <url>
          <loc>https://wesmilam.github.io/llm-guardrail-api/admin-ui/</loc>
-         <lastmod>2025-11-02</lastmod>
+         <lastmod>2025-11-12</lastmod>
     </url>
     <url>
          <loc>https://wesmilam.github.io/llm-guardrail-api/api-reference/</loc>
-         <lastmod>2025-11-02</lastmod>
+         <lastmod>2025-11-12</lastmod>
     </url>
     <url>
          <loc>https://wesmilam.github.io/llm-guardrail-api/architecture/</loc>
-         <lastmod>2025-11-02</lastmod>
+         <lastmod>2025-11-12</lastmod>
     </url>
     <url>
          <loc>https://wesmilam.github.io/llm-guardrail-api/policy-packs/</loc>
-         <lastmod>2025-11-02</lastmod>
+         <lastmod>2025-11-12</lastmod>
     </url>
     <url>
          <loc>https://wesmilam.github.io/llm-guardrail-api/quickstart/</loc>
-         <lastmod>2025-11-02</lastmod>
+         <lastmod>2025-11-12</lastmod>
     </url>
     <url>
          <loc>https://wesmilam.github.io/llm-guardrail-api/release-notes/</loc>
-         <lastmod>2025-11-02</lastmod>
+         <lastmod>2025-11-12</lastmod>
     </url>
     <url>
          <loc>https://wesmilam.github.io/llm-guardrail-api/soc2-evidence/</loc>
-         <lastmod>2025-11-02</lastmod>
+         <lastmod>2025-11-12</lastmod>
     </url>
     <url>
          <loc>https://wesmilam.github.io/llm-guardrail-api/tenants-and-rbac/</loc>
-         <lastmod>2025-11-02</lastmod>
+         <lastmod>2025-11-12</lastmod>
     </url>
     <url>
          <loc>https://wesmilam.github.io/llm-guardrail-api/verifier/</loc>
-         <lastmod>2025-11-02</lastmod>
+         <lastmod>2025-11-12</lastmod>
+    </url>
+    <url>
+         <loc>https://wesmilam.github.io/llm-guardrail-api/_includes/versions/</loc>
+         <lastmod>2025-11-12</lastmod>
+    </url>
+    <url>
+         <loc>https://wesmilam.github.io/llm-guardrail-api/components/core/</loc>
+         <lastmod>2025-11-12</lastmod>
+    </url>
+    <url>
+         <loc>https://wesmilam.github.io/llm-guardrail-api/components/enterprise/</loc>
+         <lastmod>2025-11-12</lastmod>
+    </url>
+    <url>
+         <loc>https://wesmilam.github.io/llm-guardrail-api/components/verifier/</loc>
+         <lastmod>2025-11-12</lastmod>
+    </url>
+    <url>
+         <loc>https://wesmilam.github.io/llm-guardrail-api/policy-packs/</loc>
+         <lastmod>2025-11-12</lastmod>
+    </url>
+    <url>
+         <loc>https://wesmilam.github.io/llm-guardrail-api/policy-packs/schema/</loc>
+         <lastmod>2025-11-12</lastmod>
     </url>
 </urlset>
