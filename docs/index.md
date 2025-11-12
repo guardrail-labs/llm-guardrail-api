@@ -7,6 +7,8 @@ workflow, and supporting assets maintained across the Guardrail repositories.
 
 **Versions:** Core `1.5.0` • Enterprise `1.4.0` • Verifier `0.2.0` • Policy Packs `1.0.0`
 
+**Guardrail Labs, LLC — Patent Pending**
+
 ## Clarify-First Architecture
 
 The Guardrail API follows a “clarify-first, then block” philosophy. Every ambiguous or

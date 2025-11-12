@@ -1,3 +1,5 @@
+> Guardrail Labs, LLC — Patent Pending
+
 # Verifier Microservice (v0.2.0)
 
 - **Purpose:** Assess ambiguous intent with provider failover; no code execution.
