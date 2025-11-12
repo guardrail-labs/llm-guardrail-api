@@ -487,10 +487,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#clarify-first-architecture-dual-arm" class="md-nav__link">
+  <a href="#clarify-first-architecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Clarify-First Architecture (dual-arm)
+        Clarify-First Architecture
       
     </span>
   </a>
@@ -775,10 +775,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#clarify-first-architecture-dual-arm" class="md-nav__link">
+  <a href="#clarify-first-architecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Clarify-First Architecture (dual-arm)
+        Clarify-First Architecture
       
     </span>
   </a>
@@ -811,6 +811,23 @@ operational guidance, architectural background, and governance controls that und
 Guardrail platform. Use the navigation to explore the runtime, policy packs, verifier
 workflow, and supporting assets maintained across the Guardrail repositories.</p>
 <p><strong>Versions:</strong> Core <code>1.5.0</code> • Enterprise <code>1.4.0</code> • Verifier <code>0.2.0</code> • Policy Packs <code>1.0.0</code></p>
+<h2 id="clarify-first-architecture">Clarify-First Architecture<a class="headerlink" href="#clarify-first-architecture" title="Permanent link">&para;</a></h2>
+<p>The Guardrail API follows a “clarify-first, then block” philosophy. Every ambiguous or
+potentially unsafe request is clarified before execution.</p>
+<div class="highlight"><pre><span></span><code>flowchart LR
+  U[User or Client] --&gt;|Prompt| IN[Ingress Arm&lt;br/&gt;Sanitize + Classify]
+  IN --&gt;|Unclear| VF[Verifier&lt;br/&gt;Assess-Only]
+  VF --&gt;|Clarify / Block / Allow| IN
+  IN --&gt;|Safe| LLM[(LLM)]
+  LLM --&gt; EG[Egress Arm&lt;br/&gt;Filter + Redact]
+  EG --&gt;|Response| U
+</code></pre></div>
+<p>Ingress Arm — Normalizes text, detects confusables, and classifies safety. Unclear or
+borderline requests are sent to the Verifier.</p>
+<p>Verifier — An assess-only microservice that never executes user code; it determines whether a
+request is safe, needs clarification, or should be blocked.</p>
+<p>Egress Arm — Filters model outputs, redacts sensitive or non-compliant data, and protects users
+even when ingress is degraded (dual-arm resilience).</p>
 <ul>
 <li><strong>What is Guardrail?</strong> A real-time safety &amp; compliance firewall for LLMs with clarify-first policy enforcement.</li>
 <li><strong>Components</strong></li>
@@ -819,18 +836,6 @@ workflow, and supporting assets maintained across the Guardrail repositories.</p
 <li><a href="components/verifier/">Verifier Microservice</a></li>
 <li><a href="policy-packs/">Policy Packs</a></li>
 </ul>
-<h2 id="clarify-first-architecture-dual-arm">Clarify-First Architecture (dual-arm)<a class="headerlink" href="#clarify-first-architecture-dual-arm" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>flowchart LR
-  U[User/Client] --&gt;|Prompt| IN[Ingress Arm&lt;br/&gt;Sanitize + Classify]
-  IN --&gt;|Unclear| VF[Verifier&lt;br/&gt;assess-only]
-  VF --&gt;|Clarify/Block/Allow| IN
-  IN --&gt;|Safe| LLM[(LLM)]
-  LLM --&gt; EG[Egress Arm&lt;br/&gt;Filter + Redact]
-  EG --&gt;|Response| U
-</code></pre></div>
-<p>Ingress isolates inbound threats (prompt injection, confusables) and routes ambiguous intent to Verifier.</p>
-<p>Verifier is assess-only (never executes user code); fails closed with provider fallback.</p>
-<p>Egress protects outputs (data exfiltration, PHI/PII leaks) even if ingress is degraded (dual-arm decoupling).</p>
 <hr />
 
 
