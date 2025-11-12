@@ -6,14 +6,23 @@ repo_name: llm-guardrail-api
 nav:
   - Home: index.md
   - Quickstart: quickstart.md
+  - Architecture:
+      - Overview: architecture.md
+      - Tenants & RBAC: tenants-and-rbac.md
+      - Admin UI: admin-ui.md
   - Components:
-    - Core: components/core.md
-    - Enterprise: components/enterprise.md
-    - Verifier: components/verifier.md
+      - Core: components/core.md
+      - Enterprise: components/enterprise.md
+      - Verifier: components/verifier.md
   - Policy Packs:
-    - Overview: policy-packs/index.md
-    - Schema: policy-packs/schema.md
-  - Troubleshooting: troubleshooting.md
+      - Overview: policy-packs/index.md
+      - Schema: policy-packs/schema.md
+  - Compliance & Operations:
+      - SOC2 Evidence: soc2-evidence.md
+      - SBOM: compliance/sbom.md
+  - API:
+      - Reference: api-reference.md
+  - Release Notes: release-notes.md
   - About: about.md
   - Legal: legal.md
 theme:
