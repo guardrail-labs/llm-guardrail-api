@@ -9,6 +9,7 @@ on:
     paths:
       - "guardrailctl/**"
       - "pyproject.toml"
+  workflow_dispatch: {}
 
 jobs:
   ci:
