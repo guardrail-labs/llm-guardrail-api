@@ -47,7 +47,7 @@ verifier usage, and SOC 2 evidence collection.
 Use `pipx` for an isolated installation:
 
 ```bash
-pipx install git+https://github.com/WesMilam/llm-guardrail-api.git
+pipx install git+https://github.com/guardrail-labs/llm-guardrail-api.git
 ```
 
 Or install locally while developing:
