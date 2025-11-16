@@ -16,7 +16,6 @@ workflow, and supporting assets maintained across the Guardrail repositories.
 
 **Guardrail Labs, LLC — Patent Pending**
 
-### Clarify-First Flow (Mermaid Diagram)
 ## Clarify-First Architecture
 
 The Guardrail API follows a “clarify-first, then block” philosophy. Every ambiguous or
