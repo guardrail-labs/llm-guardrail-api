@@ -1,7 +1,7 @@
 site_name: Guardrail API Docs
 site_description: Umbrella documentation portal for Guardrail API runtime, policy packs, and operations.
-site_url: https://wesmilam.github.io/llm-guardrail-api/
-repo_url: https://github.com/WesMilam/llm-guardrail-api
+site_url: https://guardrail-labs.github.io/llm-guardrail-api/
+repo_url: https://github.com/guardrail-labs/llm-guardrail-api
 repo_name: llm-guardrail-api
 nav:
   - Home: index.md
@@ -40,7 +40,7 @@ markdown_extensions:
 plugins:
   - search
 extra:
-  version: "1.0.0"
+  version: "1.5.0"
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/guardrail-labs
