@@ -1,6 +1,7 @@
 # Guardrail Umbrella Docs
 
-[![Docs](https://img.shields.io/badge/docs-live-blue)](#)
+[![Docs](https://img.shields.io/badge/docs-live-blue)](https://guardrail-labs.github.io/llm-guardrail-api/)
+
 ![Core](https://img.shields.io/badge/Core-1.5.0-green)
 ![Enterprise](https://img.shields.io/badge/Enterprise-1.4.0-green)
 ![Verifier](https://img.shields.io/badge/Verifier-0.2.0-green)
@@ -37,8 +38,8 @@ channels, verifying artifacts, and rendering deployment assets.
 
 ## Documentation portal
 
-The complete product documentation lives at
-(https://guardrail-labs.github.io/llm-guardrail-api/).
+The complete product documentation lives at:
+https://guardrail-labs.github.io/llm-guardrail-api/.
 It covers installation, architecture, tenants and RBAC, policy pack workflows, the Admin UI,
 verifier usage, and SOC 2 evidence collection.
 
@@ -65,6 +66,7 @@ List channels and verify releases (Core edition):
 guardrailctl channels list
 guardrailctl verify --edition core --tag v1.5.0
 ```
+
 Install to a target directory:
 
 ```bash
@@ -80,4 +82,5 @@ guardrailctl helm render --out ./manifests
 ```
 
 Refer to the [documentation portal](https://guardrail-labs.github.io/llm-guardrail-api/) for
-end-to-end guides covering enterprise installation, operations, and release verification.
+end-to-end guides covering installation, operations, and release verification for all supported editions.
+
