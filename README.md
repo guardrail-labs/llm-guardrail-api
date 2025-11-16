@@ -38,7 +38,7 @@ channels, verifying artifacts, and rendering deployment assets.
 ## Documentation portal
 
 The complete product documentation lives at
-[https://wesmilam.github.io/llm-guardrail-api/](https://guardrail-labs.github.io/llm-guardrail-api/).
+(https://guardrail-labs.github.io/llm-guardrail-api/).
 It covers installation, architecture, tenants and RBAC, policy pack workflows, the Admin UI,
 verifier usage, and SOC 2 evidence collection.
 
