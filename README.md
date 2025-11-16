@@ -59,17 +59,16 @@ pip install -e .
 
 ## Common commands
 
-List channels and verify releases:
+List channels and verify releases (Core edition):
 
 ```bash
 guardrailctl channels list
-guardrailctl verify --edition enterprise --tag v1.0.0-GA
-```
+guardrailctl verify --edition core --tag v1.5.0
 
 Install to a target directory:
 
 ```bash
-guardrailctl install --edition enterprise --tag v1.0.0-GA --dest /opt/guardrail
+guardrailctl install --edition core --tag v1.5.0 --dest /opt/guardrail
 ```
 
 Generate deployment assets:
