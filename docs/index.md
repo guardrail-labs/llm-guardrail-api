@@ -5,13 +5,18 @@ operational guidance, architectural background, and governance controls that und
 Guardrail platform. Use the navigation to explore the runtime, policy packs, verifier
 workflow, and supporting assets maintained across the Guardrail repositories.
 
-**Versions:** Core `1.5.0` • Enterprise `1.4.0` • Verifier `0.2.0` • Policy Packs `1.0.0`
+**Versions:**  
+- [Core `1.5.0`](components/core.md)  
+- [Enterprise `1.4.0`](components/enterprise.md)  
+- [Verifier `0.2.0`](components/verifier.md)  
+- [Policy Packs `1.0.0`](policy-packs/index.md)
 
 - 👉 Start here: [Quickstart](quickstart.md)
-- See also: [Troubleshooting](troubleshooting.md)
+
 
 **Guardrail Labs, LLC — Patent Pending**
 
+### Clarify-First Flow (Mermaid Diagram)
 ## Clarify-First Architecture
 
 The Guardrail API follows a “clarify-first, then block” philosophy. Every ambiguous or
