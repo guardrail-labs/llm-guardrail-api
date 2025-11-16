@@ -28,6 +28,9 @@ The Guardrail platform is delivered through four coordinated repositories:
 4. **Policy Packs (`llm-guardrail-policy-packs`)** – curated rule bundles that encode Guardrail
    best practices and can be promoted across tenants.
 
+> **Note:** The Enterprise Runtime (`llm-guardrail-api-enterprise`) and its artifacts are private and available only under commercial license. The public docs and CLI can interact with these editions, but their source repositories and container images are not publicly accessible.
+
+
 Each repository publishes releases independently so teams can version runtimes, policy packs,
 and documentation on their own cadence. The umbrella CLI links them together by fetching
 channels, verifying artifacts, and rendering deployment assets.
