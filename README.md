@@ -8,7 +8,8 @@
 
 > Guardrail Labs, LLC — Patent Pending
 
-See **versions:** {% include_relative docs/_includes/versions.md %}
+See the [documentation portal](https://guardrail-labs.github.io/llm-guardrail-api/) for the full version matrix.
+
 
 This repository contains the Guardrail API umbrella project. It publishes the MkDocs-based
 documentation portal, the `guardrailctl` CLI, and deployment templates used to bootstrap new
