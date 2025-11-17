@@ -17,7 +17,7 @@ combined for full-stack governance.
 https://github.com/guardrail-labs/llm-guardrail-api-next
 
 **Edition:**  
-**Open Source (MIT Licensed)**
+**Open Source (Apache 2.0 Licensed)**
 
 **Current Version:**  
 **1.5.0**
@@ -41,6 +41,7 @@ the essential mediation logic used across all Guardrail editions.
 - Proof-of-concept integrations  
 - Lightweight production enforcement  
 - Model gateway experimentation  
+
 
 ---
 
