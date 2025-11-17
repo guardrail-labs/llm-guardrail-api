@@ -110,3 +110,55 @@ Use `pipx` for an isolated installation:
 
 ```bash
 pipx install git+https://github.com/guardrail-labs/llm-guardrail-api.git
+```
+
+Install locally while developing:
+```
+python -m pip install -U pip
+pip install -e .
+
+```
+
+##🔧 Common guardrailctl Commands
+
+List channels and verify releases (Core example)
+```
+guardrailctl channels list
+guardrailctl verify --edition core --tag v1.5.0
+```
+
+Install a component to a target directory
+```
+guardrailctl install --edition core --tag v1.5.0 --dest /opt/guardrail
+```
+
+Generate deployment assets
+```
+guardrailctl compose init --dest /opt/guardrail
+mkdir -p manifests
+guardrailctl helm render --out ./manifests
+```
+---
+
+##🔗 Repository Index
+
+| Component              | Description                            | Repository                                                                                                                   |
+| ---------------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **Umbrella & CLI**     | Docs portal, CLI, deployment templates | [https://github.com/guardrail-labs/llm-guardrail-api](https://github.com/guardrail-labs/llm-guardrail-api)                   |
+| **Core Runtime**       | Open-source enforcement runtime        | [https://github.com/guardrail-labs/llm-guardrail-api-next](https://github.com/guardrail-labs/llm-guardrail-api-next)         |
+| **Enterprise Runtime** | Private hardened edition               | Private repo (licensed customers only)                                                                                       |
+| **Policy Packs**       | Curated governance bundles             | [https://github.com/guardrail-labs/llm-guardrail-policy-packs](https://github.com/guardrail-labs/llm-guardrail-policy-packs) |
+| **Verifier**           | Intent verification microservice       | [https://github.com/guardrail-labs/guardrail-verifier](https://github.com/guardrail-labs/guardrail-verifier)                 |
+
+---
+
+##🛡 About Guardrail Labs
+Guardrail Labs builds AI security, safety, and governance infrastructure.
+Our mission is to help teams deploy AI responsibly — with transparency,
+accountability, and compliance built in.
+
+To learn more or contact us:
+enterprise@guardrailapi.com
+security@guardrailapi.com
+
+© Guardrail Labs LLC 2025. All rights reserved.
