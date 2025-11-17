@@ -52,9 +52,10 @@ This document explains how these layers operate in a unified runtime.
        └──────────────────────────────┘
 
 **Key idea:**  
-Even if the **ingress arm** becomes degraded or rate-limited, the **egress arm remains active**, ensuring no unsafe content ever leaves the model.
+Even if the ingestion path experiences degradation or rate-limiting, the egress arm is designed to operate independently and continue applying output-side governance.
 
-This is part of Guardrail's **dual-arm isolation guarantee**.
+This reflects Guardrail’s dual-arm isolation model, where each arm evaluates traffic separately rather than depending on the other.
+
 
 ---
 
