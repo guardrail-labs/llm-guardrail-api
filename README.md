@@ -145,18 +145,16 @@ guardrailctl helm render --out ./manifests
 ```
 ---
 
-🏛 Licensing Model
+## 🏛 Licensing Model
 
-Core Runtime — open source (Apache 2.0)
+| Component                 | License Type                          | Notes |
+|---------------------------|----------------------------------------|-------|
+| **Umbrella Docs & CLI**   | MIT License                            | Public and open; docs + `guardrailctl` tooling |
+| **Core Runtime**          | Apache 2.0                             | Open source; dual-arm enforcement engine |
+| **Verifier Service**      | Proprietary (Guardrail Labs License)   | Source-available; non-execution ambiguity classifier |
+| **Policy Packs**          | Proprietary (Guardrail Labs License)   | Source-available; signed rule bundles and templates |
+| **Enterprise Runtime**    | Proprietary (Guardrail Labs License)   | Governance, RBAC, Admin UI, retention, evidence bundles |
 
-Verifier Service — source-available (non-commercial license)
-
-Policy Packs — source-available (non-commercial license)
-
-Enterprise Runtime — proprietary commercial license
-
-This repository (Umbrella) is licensed under Apache 2.0 and contains no
-proprietary logic from the Enterprise edition.
 ---
 
 ## 🛡 About Guardrail Labs
