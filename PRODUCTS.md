@@ -83,7 +83,7 @@ Enterprise builds directly on the Core Runtime to provide a complete AI governan
 # 🔍 3. Guardrail Verifier Service
 
 **Repository:** https://github.com/guardrail-labs/guardrail-verifier  
-**Edition:** Open Source (configurable for enterprise)  
+**Edition:** Proprietary (public source access)  
 **Current Version:** 0.2.0
 
 The Verifier is an optional microservice used when **intent is ambiguous**.
@@ -115,7 +115,7 @@ The Verifier improves accuracy for complex queries while maintaining safety boun
 # 📦 4. Guardrail Policy Packs
 
 **Repository:** https://github.com/guardrail-labs/llm-guardrail-policy-packs  
-**Edition:** Open Source (with enterprise extensions)  
+**Edition:** Proprietary (public source access)   
 **Current Version:** 1.0.0
 
 Policy Packs define the rules that govern how Guardrail evaluates prompts and responses.
