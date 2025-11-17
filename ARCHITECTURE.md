@@ -51,217 +51,175 @@ This document explains how these layers operate in a unified runtime.
        │      Client / Application    │
        └──────────────────────────────┘
 
-**Key idea:**  
-Even if the ingestion path experiences degradation or rate-limiting, the egress arm is designed to operate independently and continue applying output-side governance.
 
-This reflects Guardrail’s dual-arm isolation model, where each arm evaluates traffic separately rather than depending on the other.
-
+**Dual-arm model:**  
+Ingress and egress operate through **separate evaluation paths**.  
+If the ingress path is degraded, the egress arm is designed to continue applying output-side governance whenever possible.
 
 ---
 
 ## 🧱 2. Ingress Guard (Request Mediation)
 
-The ingress arm protects the model from:
-
-- Unsafe or harmful prompts  
-- Hidden text attacks (Unicode, confusables)  
-- Jailbreak patterns  
-- Misleading multi-stage requests  
-- Data leakage attempts  
-- Ambiguous intent from unknown users  
+The ingress arm evaluates prompts before they reach the model.
 
 ### Responsibilities
+- Normalize text and detect hidden characters  
+- Evaluate rules defined in policy packs  
+- Identify ambiguous or high-risk intent  
+- Determine whether verification is needed  
+- Apply tenant-specific quotas, rate limits, and restrictions  
 
-- Normalize and sanitize user input  
-- Detect suspicious directives  
-- Enforce policy pack rules  
-- Trigger verification when intent is unclear  
-- Rate-limit or circuit-break based on tenant quotas  
+### Possible Outcomes
+- **Clean →** forwarded to model  
+- **Requires clarification →** verifier assesses intent  
+- **Still unclear →** request returned to the user for clarification  
+- **Blocked →** user receives a safe, policy-aligned denial  
+- **Escalated →** recorded as an incident for admin review  
 
-### Outcomes
-
-A request can be:
-
-- **Clean** → forwarded to the LLM  
-- **Clarified** → sent to verifier  
-- **Blocked** → user receives a safe denial message  
-- **Escalated** → logged as an incident for admin review  
-
-All decisions are added to the HMAC-signed audit log.
+All decisions are written to the HMAC-signed audit log.
 
 ---
 
 ## 🔁 3. Verifier Layer (Intent Evaluation)
 
-The Verifier performs **non-execution-based** analysis of a request when the ingress arm identifies unclear or suspicious intent.
+The verifier analyzes content **without executing it** and is used when intent is ambiguous.
 
-### What it does
+### What the Verifier Does
+- Classifies whether intent is safe or harmful  
+- Determines if executing the prompt would pose risk  
+- Detects disguised or dual-intent patterns  
+- Provides a safe evaluation result to the ingress guard  
 
-- Determines whether executing the request could harm the model, user, or system  
-- Confirms whether hidden instructions or dual-intent patterns exist  
-- Provides the Guardrail decision engine with a safe recommendation  
+### If Verifier Cannot Determine Intent
+If the verifier cannot determine intent with sufficient confidence:
 
-### What it *does not* do
+**→ The request is returned to the submitter for clarification.**
 
-- Never executes untrusted user code  
-- Never forwards content to external tools  
-- Never evaluates harmful instructions  
-- Never bypasses Guardrail policy packs  
+The system does *not* proceed or guess.
 
-### When used
-
-- Unclear intent (e.g., “explain malware vs write malware”)  
-- Potential data exfiltration patterns  
-- Dual-stage payloads or agentic prompts  
-- Suspiciously encoded content  
-
-If the verifier is unavailable, Guardrail applies **conservative blocking**.
+### What the Verifier Never Does
+- Never executes user instructions  
+- Never forwards content to tools or external systems  
+- Never bypasses Guardrail policy enforcement  
 
 ---
 
 ## 📤 4. Egress Guard (Response Mediation)
 
-The egress arm protects the **user** and **organization** from unsafe or prohibited model output.
-
-Egress enforcement runs even if ingress is unavailable, providing:
-
-- Independent circuit breakers  
-- Independent policy evaluation  
-- Guaranteed output governance  
+The egress arm evaluates LLM output before it reaches the user.
 
 ### Responsibilities
+- Apply policy rules to model responses  
+- Detect harmful or disallowed model behaviors  
+- Identify accidental data leakage  
+- Evaluate hallucination-prone or unsafe categories  
+- Support compliance indicators (PHI/PII, GDPR-relevant text)  
 
-- Enforce output-side policy packs  
-- Detect hallucinations, unsafe content, or accidental leakage  
-- Govern regulated data behaviors (PHI/PII indicators, GDPR signals)  
-- Capture evidence for audits  
-- Trigger clarifications or admin review on risky responses  
-
-Egress is the last line of defense before content reaches the user.
+### Behavior
+The egress arm operates independently from ingress and continues to apply output-side evaluation even in scenarios where ingress may be degraded.
 
 ---
 
 ## 📦 5. Policy Packs
 
-Policy Packs define the governance rules for both arms.
+Policy Packs are signed, versioned bundles of governance rules.
 
-Each pack contains:
+Policy Packs include:
+- Safety and risk rules  
+- Regulatory profiles (GDPR, HIPAA, AI-Act)  
+- Industry presets  
+- Metadata: signature, checksum, version, tenant namespace  
 
-- Safety rules  
-- Compliance profiles (GDPR, HIPAA, AI-Act)  
-- Industry-specific policies  
-- Metadata, version, signatures, and checksums  
-- Tenant-isolated namespaces  
-
-Policy packs are:
-
-- **Signed**
-- **Versioned**
-- **Diffable**
-- **Rollback-safe**
-- **Tenant-isolated**
-
-Admin Console allows pack inspection, diffing, and activation.
+Characteristics:
+- Immutable once signed  
+- Versioned and diffable  
+- Independently deployable  
+- Tenant-isolated  
+- Fully audited on activation or rollback  
 
 ---
 
 ## 🧑‍🤝‍🧑 6. Tenancy & Isolation
 
-Each tenant receives a fully isolated policy and data environment:
+Each tenant operates in a **fully isolated governance environment**:
 
-- Policy namespaces  
-- Audit logs  
-- Quotas and rate limits  
-- Clarification and appeals queues  
-- Circuit breaker states  
-- Optional verifier settings  
+- Dedicated policy namespace  
+- Independent audit log stream  
+- Separate clarification and incident queues  
+- Independent circuit breaker and quota settings  
+- Optional tenant-specific verifiers  
 
-No cross-tenant visibility is permitted, even for admins.
-
-Tenant separation is enforced at:
-
-1. Ingress guard  
-2. Egress guard  
-3. Policy packs  
-4. Audit retention  
-5. Admin UI access  
+No tenant can access another tenant’s data or policies.
 
 ---
 
 ## 🧾 7. Audit, Retention & Evidence
 
-Every decision recorded by Guardrail generates an **HMAC-signed audit event.**
-
-Events include:
+Guardrail produces structured, tamper-evident audit logs containing:
 
 - Request/response metadata  
-- Policy results  
-- Sanitization decisions  
-- Verification details  
+- Policy evaluation results  
+- Sanitization outcomes  
+- Verification results  
 - Admin actions  
-- Rollbacks and pack loads  
+- Activation/rollback of policy packs  
 
 Optional modules support:
 
-- Retention policies  
-- GDPR/AI-Act data deletion requests  
-- SOC 2 evidence bundles  
-- Long-term log archival  
-
-Audit integrity is cryptographically guaranteed.
+- Retention windows  
+- GDPR/AI-Act deletion workflows  
+- Long-term log archival to S3/MinIO/GCS  
+- SOC 2 evidence generation  
 
 ---
 
 ## 🏗 8. Deployment Architecture
 
-Guardrail can be deployed in:
+Guardrail can be deployed in multiple modes:
 
-### ✔ Local / Docker Mode  
-Ideal for development and testing.
+### Local / Docker
+Simple evaluation environments.
 
-### ✔ Kubernetes / Helm  
-Recommended for production.  
+### Kubernetes / Helm (Recommended)
 Supports:
-
 - Horizontal scaling  
-- Multi-tenant environments  
+- Multi-tenant deployments  
+- Redis, Postgres, and object storage backends  
 - Verifier autoscaling  
-- Redis, Postgres, S3 backends  
 
-### ✔ Sidecar or Gateway Mode  
-Guardrail can act as:
+### Sidecar / Gateway
+Can operate as:
+- API-level firewall  
+- Reverse proxy filter  
+- Model gateway  
+- Edge mediation layer  
 
-- A standalone gateway service  
-- An API-level firewall  
-- A sidecar to application pods  
-- A reverse proxy filter layer  
-
-### ✔ Multi-Model Architecture  
-Supports routing to:
-
+### Multi-Model Routing
+Supports:
 - OpenAI  
 - Anthropic  
 - Azure OpenAI  
 - Vertex  
 - Local models  
 
-Routing rules are defined per tenant and per policy.
+Routing is tenant-specific.
 
 ---
 
 ## 🔐 9. Security Model (High-Level)
 
-- **Clarify-first** → ambiguity results in verification  
-- **Two-tier blocking** → safe denial + escalation paths  
-- **No execution of user code** at any stage  
-- **Unicode/confusables detection** on ingress  
-- **Independent ingress/egress enforcement**  
-- **Tamper-evident audit log** via HMAC  
-- **Verifier fallback safety**  
-- **Strict tenant isolation**  
-- **SOC 2–aligned controls** in Enterprise edition  
+Guardrail uses the following high-level security principles:
 
-For a detailed overview, see `SECURITY_OVERVIEW.md`.
+- **Clarify-first** → ambiguous requests require intent clarification  
+- **Return-to-requestor loop** for unresolved ambiguity  
+- **Non-execution verification**  
+- **Independent ingress/egress mediation paths**  
+- **Unicode/confusables normalization**  
+- **Tamper-evident audit logging (HMAC)**  
+- **Tenant isolation across all layers**  
+- **Optional SOC 2–aligned controls in Enterprise edition**  
+
+For a broader overview, see `SECURITY_OVERVIEW.md`.
 
 ---
 
@@ -269,12 +227,13 @@ For a detailed overview, see `SECURITY_OVERVIEW.md`.
 
 | Component | Purpose |
 |----------|---------|
-| **Core Runtime** | Open-source policy evaluation and dual-arm mediation |
-| **Enterprise Runtime** | Hardened edition with admin UI, retention, SOC 2 controls |
-| **Verifier** | Intent clarification and risk assessment |
+| **Core Runtime** | Open-source ingress + egress mediation engine |
+| **Enterprise Runtime** | Hardened edition with admin UI, retention, compliance tooling |
+| **Verifier** | Intent evaluation when requests are unclear |
 | **Policy Packs** | Signed governance bundles |
-| **Umbrella CLI (`guardrailctl`)** | Installation, verification, artifact management |
+| **Umbrella CLI (`guardrailctl`)** | Installation, validation, artifact coordination |
 
 ---
 
 © Guardrail Labs LLC 2025. All rights reserved.
+
