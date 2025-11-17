@@ -145,16 +145,18 @@ guardrailctl helm render --out ./manifests
 ```
 ---
 
-## 🔗 Repository Index
+🏛 Licensing Model
 
-| Component              | Description                            | Repository                                                                                                                   |
-| ---------------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| **Umbrella & CLI**     | Docs portal, CLI, deployment templates | [https://github.com/guardrail-labs/llm-guardrail-api](https://github.com/guardrail-labs/llm-guardrail-api)                   |
-| **Core Runtime**       | Open-source enforcement runtime        | [https://github.com/guardrail-labs/llm-guardrail-api-next](https://github.com/guardrail-labs/llm-guardrail-api-next)         |
-| **Enterprise Runtime** | Private hardened edition               | Private repo (licensed customers only)                                                                                       |
-| **Policy Packs**       | Curated governance bundles             | [https://github.com/guardrail-labs/llm-guardrail-policy-packs](https://github.com/guardrail-labs/llm-guardrail-policy-packs) |
-| **Verifier**           | Intent verification microservice       | [https://github.com/guardrail-labs/guardrail-verifier](https://github.com/guardrail-labs/guardrail-verifier)                 |
+Core Runtime — open source (Apache 2.0)
 
+Verifier Service — source-available (non-commercial license)
+
+Policy Packs — source-available (non-commercial license)
+
+Enterprise Runtime — proprietary commercial license
+
+This repository (Umbrella) is licensed under Apache 2.0 and contains no
+proprietary logic from the Enterprise edition.
 ---
 
 ## 🛡 About Guardrail Labs
