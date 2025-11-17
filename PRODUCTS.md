@@ -1,181 +1,199 @@
 # Guardrail API — Product Overview
 
 > Guardrail Labs, LLC — Patent Pending  
-> This document describes the four primary components of the Guardrail API platform.
+> This document describes the primary components of the Guardrail API platform and
+> clarifies their licensing and roles in the system.
 
-The Guardrail API platform is composed of modular, interoperable components that work
-together to evaluate LLM traffic, enforce governance rules, support regulatory alignment,
-and provide visibility into AI interactions.
-
-Each component can be adopted independently or deployed together for full-stack coverage.
+The Guardrail API platform is composed of modular components that evaluate AI
+traffic, enforce governance policies, support regulatory alignment, and provide
+visibility into model behavior. Each component operates independently but can be
+combined for full-stack governance.
 
 ---
 
 # 🧠 1. Guardrail Core Runtime
 
-**Repository:** https://github.com/guardrail-labs/llm-guardrail-api-next  
-**Edition:** Open Source  
-**Current Version:** 1.5.0
+**Repository:**  
+https://github.com/guardrail-labs/llm-guardrail-api-next
 
-The Core Runtime provides the foundational enforcement engine for Guardrail, including:
+**Edition:**  
+**Open Source (MIT Licensed)**
 
-### Features
-- **Dual-arm traffic evaluation** (ingress + egress)  
-- **Clarify-first intent assessment workflow**  
-- **Return-to-requestor loop** when intent cannot be determined  
-- **Unicode / confusables detection**  
-- **Policy pack evaluation**  
-- **HMAC-signed audit logging**  
-- **Tenant header handling**  
-- **Local development + testing support**  
+**Current Version:**  
+**1.5.0**
 
-### Use Cases
-- Developer prototyping  
-- Local enforcement gateways  
-- Lightweight production deployments  
-- Sandbox runtimes  
+The Core Runtime is the foundational enforcement engine responsible for
+evaluating both **ingress** (requests) and **egress** (responses). It provides
+the essential mediation logic used across all Guardrail editions.
 
-### Sub-components
-- FastAPI application  
-- Request/response mediators  
-- Policy evaluation layer  
-- Basic telemetry endpoints  
+### Key Features
+- Dual-arm (ingress + egress) traffic evaluation  
+- Clarify-first workflow  
+- Return-to-requestor handling when intent remains ambiguous  
+- Unicode + confusables normalization  
+- Policy pack evaluation  
+- HMAC-signed audit logging  
+- REST API with FastAPI  
+- Ideal for local development and self-hosted deployments  
 
-The Core Runtime is a dependency of every Guardrail edition.
+### Common Use Cases
+- Developer environments  
+- Proof-of-concept integrations  
+- Lightweight production enforcement  
+- Model gateway experimentation  
 
 ---
 
 # 🛡 2. Guardrail Enterprise Runtime
 
-**Repository:** Private (licensed customers only)  
-**Edition:** Commercial  
-**Current Version:** 1.4.0
+**Repository:**  
+Private (licensed customers only)
 
-The Enterprise edition adds governance, compliance, and operational tooling required for
-high-risk or regulated deployments.
+**Edition:**  
+**Proprietary / Commercial License**
 
-### Features
-- **Dual-arm isolation model** with separate ingress/egress paths  
-- **Admin Console** (incidents, clarifications, appeals, tenants, policy packs)  
-- **Tenant isolation and per-tenant policy namespaces**  
-- **Signed SBOM + cosign release artifacts**  
-- **Evidence bundles for SOC 2 and GDPR/AI-Act alignment**  
-- **Extended retention + data lifecycle support**  
-- **Clarification queue viewer and admin review workflows**  
-- **Role-based access controls (RBAC)**  
+**Current Version:**  
+**1.4.0**
 
-### Use Cases
-- Regulated environments (healthcare, government, finance)  
-- Enterprise model gateways  
-- Multi-tenant SaaS offerings  
-- Audit-heavy deployments  
+The Enterprise Runtime extends the Core with governance, compliance, and
+multi-tenancy features required for regulated, high-risk, or large-scale AI
+deployments.
 
-### Integrations
-- Redis (quotas, rate limiting, DLQ)  
-- Postgres (retention and audit stores)  
-- Object storage (long-term evidence)  
-- Kubernetes + Helm charts  
+### Key Features
+- Admin Console (incidents, clarifications, policy packs, tenants)  
+- Tenant-isolated policy namespaces  
+- Clarification queue + appeals workflow  
+- Role-based access controls (RBAC)  
+- Data retention + evidence bundles  
+- Signed SBOM + cosign release artifacts  
+- Extended rate limiting, quotas, and DLQ support  
+- Kubernetes/Helm production templates  
 
-Enterprise builds directly on the Core Runtime to provide a complete AI governance platform.
+### Common Use Cases
+- Healthcare, finance, government deployments  
+- AI gateways requiring compliance controls  
+- Multi-tenant SaaS or platform integrations  
+- Enterprise-scale governance programs  
+
+Enterprise builds directly on the Core Runtime and is distributed as a
+commercially licensed product.
 
 ---
 
 # 🔍 3. Guardrail Verifier Service
 
-**Repository:** https://github.com/guardrail-labs/guardrail-verifier  
-**Edition:** Proprietary (public source access)  
-**Current Version:** 0.2.0
+**Repository:**  
+https://github.com/guardrail-labs/guardrail-verifier
 
-The Verifier is an optional microservice used when **intent is ambiguous**.
+**Edition:**  
+**Proprietary / Source-Available (public code, not open source)**
 
-It evaluates the request **without executing it** and provides a classification to the Core or Enterprise runtime.
+**Current Version:**  
+**0.2.0**
+
+The Verifier is an optional microservice used when user intent is ambiguous. It
+performs **non-execution-based** analysis to help determine whether a request
+should proceed or be clarified.
 
 ### Responsibilities
-- Analyze ambiguous inputs  
-- Detect dual-intent patterns  
-- Determine whether a request should proceed or be clarified  
-- Provide structured, non-execution-based safety signals  
-- Integrate with policy packs that define verifier categories  
+- Evaluate request intent without executing user code  
+- Detect disguised or dual-stage patterns  
+- Provide safety classifications to Core/Enterprise  
+- Support policy packs that include verifier rules  
 
-### Clarify-First Workflow
-If a request’s intent remains unclear after verification:
+### Clarify-First Behavior
+If intent remains unclear after verification:
 
-**→ It is returned to the user for clarification.**  
-The system does not guess, bypass rules, or execute untrusted content.
+**→ The request is returned to the user for clarification.**  
+The system does not proceed or guess.
 
-### Deployment
-- As a sidecar  
-- As a Kubernetes microservice  
-- As a horizontally scaled pool  
+### Deployment Modes
+- As a standalone microservice  
+- As a Kubernetes deployment  
+- As a horizontally scalable pool  
 
-The Verifier improves accuracy for complex queries while maintaining safety boundaries.
+The Verifier strengthens ambiguous-request handling while preserving safety.
 
 ---
 
 # 📦 4. Guardrail Policy Packs
 
-**Repository:** https://github.com/guardrail-labs/llm-guardrail-policy-packs  
-**Edition:** Proprietary (public source access)   
-**Current Version:** 1.0.0
+**Repository:**  
+https://github.com/guardrail-labs/llm-guardrail-policy-packs
 
-Policy Packs define the rules that govern how Guardrail evaluates prompts and responses.
+**Edition:**  
+**Proprietary / Source-Available (public code, not open source)**
 
-### Contents
-- Safety rules  
-- Regulatory profiles (GDPR, HIPAA, AI-Act)  
-- Industry-specific templates (healthcare, finance, government)  
-- Version metadata  
-- Checksums + signatures  
-- Optional verifier integration settings  
+**Current Version:**  
+**1.0.0**
 
-### Properties
+Policy Packs define governance rules used by Core and Enterprise. They are
+publicly accessible for transparency, but remain proprietary under Guardrail
+Labs’ license.
+
+### What Policy Packs Contain
+- Safety and governance rules  
+- Regulatory templates (GDPR, HIPAA, AI-Act profiles)  
+- Industry-specific rule sets  
+- Metadata: signatures, checksums, version  
+- Optional verifier integration hints  
+- Tenant-namespace support  
+
+### Characteristics
 - Signed and versioned  
 - Immutable once published  
 - Diffable in the Enterprise UI  
+- Activation and rollback fully audited  
 - Tenant-isolated  
-- Activation and rollback are fully audited  
 
-### Examples
-- Privacy-handling rules  
-- Safety categories for LLM interactions  
-- Sensitive data protections  
-- Content boundary controls  
-
-Policy Packs make governance **configurable**, not hard-coded.
+### Example Uses
+- Sensitive data handling controls  
+- Safety categories for LLM prompts  
+- Governance boundaries for agent systems  
+- Compliance-aligned enforcement templates  
 
 ---
 
-# 🔗 5. How the Products Fit Together
+# 🔗 5. How Products Work Together
 
-Client → Ingress Guard (Core/Enterprise)
-→ Verifier (optional)
-→ LLM Provider
-→ Egress Guard (Core/Enterprise)
-→ Client
+Client
+↓
+Ingress Guard (Core or Enterprise)
+↓ ↘ (if ambiguous)
+Verifier ↘ return to user if unclear
+↓
+LLM Provider
+↓
+Egress Guard (Core or Enterprise)
+↓
+Client
 
 
-### Core
-Performs evaluation and mediation.
+### Core Runtime  
+Provides the evaluation engine.
 
-### Enterprise
-Adds governance, compliance, multi-tenancy, and operational controls.
+### Enterprise Runtime  
+Adds governance + multi-tenancy + admin controls.
 
-### Verifier
-Provides intent clarification for risky or ambiguous prompts.
+### Verifier  
+Handles ambiguous-intent classification.
 
-### Policy Packs
-Define the rules each component uses during evaluation.
+### Policy Packs  
+Define the rules each runtime enforces.
+
+Together, they form a configurable, dual-arm AI mediation platform.
 
 ---
 
-# 🧭 6. Choosing an Edition
+# 🧭 6. Selecting the Right Components
 
-| Need | Recommended Component |
-|------|------------------------|
-| Local development or POC | Core Runtime |
-| Full enterprise governance | Enterprise Runtime |
-| Complex ambiguous prompts | Verifier |
-| Safety/compliance rules | Policy Packs |
+| Requirement | Component |
+|------------|-----------|
+| Local development | Core Runtime |
+| Production governance | Enterprise Runtime |
+| Ambiguous intent handling | Verifier |
+| Safety + compliance rules | Policy Packs |
+| Deployment automation | Umbrella CLI |
 
 ---
 
