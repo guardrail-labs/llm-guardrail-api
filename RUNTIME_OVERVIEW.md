@@ -84,23 +84,66 @@ the configured model provider through the runtime’s enforcement layer.
 
 # 🔄 3. Response Lifecycle (Egress)
 
-After the LLM generates a response:
+After the LLM generates a response, Guardrail evaluates **all output
+modalities**, not just text. The egress arm inspects and evaluates:
 
-### Step 1 — Content Normalization
-Light normalization and metadata tagging may apply.
+- text responses  
+- image outputs  
+- audio outputs  
+- file and document results  
+- tool-call / function-call results  
+- JSON-mode structured outputs  
 
-### Step 2 — Egress Policy Evaluation
-Policies evaluate:
-- Safety categories  
-- Leakage indicators  
-- Disallowed content  
-- Regulatory restrictions  
+Each modality goes through the same governance pipeline with
+modality-appropriate checks.
 
-The egress arm may block, modify, or clarify, depending on policy.
+## Step 1 — Output Normalization
+Guardrail performs light normalization depending on modality, such as:
 
-### Step 3 — Return to Client
-If approved, the response returns to the user.  
-If not, the runtime returns a policy decision instead.
+- text: normalization, metadata tagging  
+- images: format validation, metadata stripping, safety signal extraction  
+- audio: transcription-based safety checks (if enabled)  
+- files: MIME validation, size and type checks, structured extraction  
+
+Normalization feeds signal data into egress policy evaluation.
+
+## Step 2 — Egress Policy Evaluation
+Egress rules determine whether model output:
+
+- contains disallowed content  
+- could leak sensitive information  
+- violates a regulatory profile  
+- requires redaction before delivery  
+- requires clarification (ambiguous or high-risk content)  
+
+Rules may be modality-specific, such as:
+
+- image safety categories  
+- file type restrictions  
+- audio transcription checks  
+- structured output validation  
+
+The egress arm evaluates output independently of the ingress arm.
+
+## Step 3 — Enforcement Decision
+Depending on policy outcome:
+
+- The response is approved and returned to the client  
+- The response is **blocked** with a policy decision  
+- The system returns a **clarification request** to the submitter  
+- The output is **redacted or transformed** (where allowed by policy)  
+
+If content is ambiguous or high-risk, egress may route back to the
+same clarify-first logic used on ingress.
+
+## Step 4 — Return to Client
+Once evaluated, the runtime returns:
+
+- the approved model output, or  
+- a structured policy decision (reason, category, tenant context)  
+
+All outcomes are logged to audit streams, including modality metadata.
+
 
 ---
 
