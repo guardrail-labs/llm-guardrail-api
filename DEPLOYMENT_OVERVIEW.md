@@ -63,7 +63,7 @@ Run via Python or Uvicorn:
 ```bash
 pip install guardrail-core
 uvicorn app.main:create_app --factory --reload
-
+```
 
 Local mode is not hardened and not intended for production.
 
