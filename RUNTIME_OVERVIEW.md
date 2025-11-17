@@ -6,278 +6,251 @@
 > integrate with the enforcement pipeline.
 
 The Guardrail Runtime powers both the open-source Core edition and the
-enterprise-governance edition. It is designed to evaluate prompts (ingress)
-and model responses (egress) independently while preserving performance
-and policy alignment.
+enterprise-governance edition. It evaluates AI traffic across all supported
+modalities and applies policy-driven governance at both ingress (prompts) and
+egress (model responses).
 
-This document explains the lifecycle of a request through the runtime.
+Guardrail does not modify the underlying model. It provides a transparent,
+policy-aligned layer that organizations control.
 
 ---
 
 # 🧱 1. Dual-Arm Architecture
 
-Guardrail evaluates AI traffic through two independent paths:
+Guardrail evaluates AI traffic through two independent enforcement paths:
 
-- **Ingress Arm** — evaluates incoming user prompts  
+- **Ingress Arm** — evaluates user-provided prompts and inputs  
 - **Egress Arm** — evaluates model-generated responses  
 
-Both arms apply policy, sanitization, and clarification logic.  
-They operate independently so egress protections continue even if ingress
-is degraded or rate-limited.
+Both arms:
 
-### Summary
+- Apply sanitization and governance rules  
+- Support clarify-first workflows  
+- Maintain independent SLAs and circuit states  
+- Log structured audit events  
 
-- Ingress focuses on **intent, safety, and ambiguity**  
-- Egress focuses on **content, leakage, and compliance**  
-- Arms do not rely on each other for correctness  
-- Each maintains separate metrics and decisions  
+Egress continues to function even if ingress is degraded, rate-limited, or
+temporarily unavailable.
 
 ---
 
 # ✨ 2. Request Lifecycle (Ingress)
 
-When a client sends a request through Guardrail, the runtime evaluates **all
-modalities**, not just text. Guardrail inspects and applies policy to:
+Guardrail supports **all modalities**, not just text. Every inbound request is
+evaluated according to its content type:
 
 - text prompts  
 - images  
 - audio streams  
 - uploaded files and documents  
-- JSON payloads or structured inputs  
-- model-specific tool-call or function-call envelopes  
+- structured JSON or function-call payloads  
+- model/agent tool-call envelopes  
 
-All modalities pass through the same governance pipeline.
+All modalities pass through a unified enforcement pipeline with
+modality-appropriate analysis.
 
 ## Step 1 — Normalization & Sanitization
-Guardrail performs modality-appropriate preprocessing, which may include:
 
-- text: Unicode normalization, confusables detection, obfuscation signals  
-- images: metadata stripping, format validation, safety category extraction  
-- audio: transcription stream extraction (if enabled), metadata validation  
-- files: MIME checking, structured content extraction, size and type limits  
+Depending on modality, Guardrail may perform:
 
-Signals produced here feed into policy evaluation.
+- **Text:** Unicode normalization, confusables detection, obfuscation signals  
+- **Images:** metadata stripping, format validation, category extraction  
+- **Audio:** optional transcription-based metadata extraction  
+- **Files:** MIME/type checks, extraction, size and structure validation  
+- **JSON/Tools:** schema validation, unsafe field detection  
+
+The runtime attaches modality and sanitization signals to the evaluation context.
 
 ## Step 2 — Policy Pack Evaluation
-Policy Packs determine:
-- allowed or disallowed categories  
-- modality-specific rules (e.g., image safety, file restrictions)  
-- requirements for clarification  
-- regulatory boundaries (e.g., PHI/PII constraints)  
 
-Rules are applied consistently across all modalities.
+Policy Packs provide the rule surface for ingress governance:
+
+- allowed/disallowed categories  
+- ambiguity indicators  
+- modality-specific rules (image safety, file restrictions, structured validation)  
+- regulatory checks (GDPR, HIPAA, AI Act profiles, etc.)  
+
+If a rule indicates ambiguity, proceed to clarifications.  
+If a rule blocks content, the request is denied with a structured decision.
 
 ## Step 3 — Clarify-First Workflow
-If intent or content is ambiguous:
-- The Verifier may be consulted for non-execution analysis  
-- If ambiguity remains, the request is returned to the submitter  
-- Guardrail does not guess or assume intent  
 
-This applies equally to text, images, audio, and file-based inputs.
+If intent or meaning is unclear:
+
+- The Verifier may be consulted for **non-execution** classification  
+- If ambiguity remains, Guardrail returns the request to the submitter  
+- Guardrail does not guess user intent  
+
+Clarify-first applies equally to text, images, audio, documents, and structured data.
 
 ## Step 4 — Forward to LLM
-Once evaluated and cleared, the request—regardless of modality—is forwarded to
-the configured model provider through the runtime’s enforcement layer.
 
+If allowed, Guardrail forwards the sanitized, policy-evaluated request to the
+configured LLM provider.
 
 ---
 
 # 🔄 3. Response Lifecycle (Egress)
 
-After the LLM generates a response, Guardrail evaluates **all output
-modalities**, not just text. The egress arm inspects and evaluates:
+After the LLM generates output, Guardrail evaluates **all modalities**:
 
 - text responses  
-- image outputs  
-- audio outputs  
-- file and document results  
-- tool-call / function-call results  
-- JSON-mode structured outputs  
+- images  
+- audio streams  
+- file/document outputs  
+- JSON-mode structured results  
+- tool/function-call outputs  
 
-Each modality goes through the same governance pipeline with
-modality-appropriate checks.
+Egress policies often differ from ingress policies, focusing on leakage,
+compliance, and safe delivery.
 
 ## Step 1 — Output Normalization
-Guardrail performs light normalization depending on modality, such as:
 
-- text: normalization, metadata tagging  
-- images: format validation, metadata stripping, safety signal extraction  
-- audio: transcription-based safety checks (if enabled)  
-- files: MIME validation, size and type checks, structured extraction  
+Depending on content type:
 
-Normalization feeds signal data into egress policy evaluation.
+- **Text:** normalization, metadata tagging  
+- **Images:** format validation, metadata stripping, safety signal extraction  
+- **Audio:** transcription-based checks if enabled  
+- **Files:** MIME checks, extraction, structure validation  
+- **Structured outputs:** schema validation and field inspection  
 
 ## Step 2 — Egress Policy Evaluation
-Egress rules determine whether model output:
 
-- contains disallowed content  
-- could leak sensitive information  
-- violates a regulatory profile  
-- requires redaction before delivery  
-- requires clarification (ambiguous or high-risk content)  
+Egress policies evaluate:
 
-Rules may be modality-specific, such as:
+- content safety  
+- leakage risk  
+- regulatory restrictions  
+- prohibited categories  
+- ambiguity requiring clarification  
+- redaction or transformation rules (if allowed by policy)  
 
-- image safety categories  
-- file type restrictions  
-- audio transcription checks  
-- structured output validation  
-
-The egress arm evaluates output independently of the ingress arm.
+Modality-specific governance (image safety, file restrictions, etc.) is applied here.
 
 ## Step 3 — Enforcement Decision
-Depending on policy outcome:
 
-- The response is approved and returned to the client  
-- The response is **blocked** with a policy decision  
-- The system returns a **clarification request** to the submitter  
-- The output is **redacted or transformed** (where allowed by policy)  
+Possible outcomes:
 
-If content is ambiguous or high-risk, egress may route back to the
-same clarify-first logic used on ingress.
+- Return model output unchanged  
+- Return a redacted or policy-transformed version (if permitted)  
+- Block and return a structured policy decision  
+- Trigger clarify-first and return the request to the submitter  
+
+Ambiguous or high-risk responses may follow the same clarification workflow as ingress.
 
 ## Step 4 — Return to Client
-Once evaluated, the runtime returns:
 
-- the approved model output, or  
-- a structured policy decision (reason, category, tenant context)  
-
-All outcomes are logged to audit streams, including modality metadata.
-
+Approved responses are delivered to the caller.  
+All outcomes are logged to audit streams with modality metadata.
 
 ---
 
 # 🧩 4. Verifier Integration
 
-The Verifier is a separate microservice used only when intent is unclear.
+The Verifier is a separate, non-execution microservice used when intent is
+ambiguous.
 
-It performs:
-- Non-execution, instruction-level analysis  
-- Classification of ambiguous or dual-use instructions  
-- Support for policy-driven clarify-first logic  
+It classifies:
 
-If the Verifier cannot clearly classify:
-- The runtime **returns the request to the submitter**  
+- purpose of a request  
+- potential harmful categories  
+- unclear or dual-use patterns  
 
-If the Verifier provides a safe categorization:
-- Policy evaluation continues normally  
+If the Verifier cannot classify confidently:
 
-The Verifier never executes untrusted content.
+- The runtime returns the request to the submitter for clarification  
+
+Guardrail does **not** execute user content during verification.
 
 ---
 
 # 📦 5. Policy Packs
 
-Policy Packs define the rules that govern the runtime.
+Policy Packs define governance rules for both ingress and egress.
 
-Each pack includes:
-- Safety categories  
-- Regulatory profiles (GDPR, HIPAA, AI Act templates)  
-- Pattern and category rules  
-- Metadata, signatures, and checksums  
+They are:
 
-Policy Packs are:
 - Versioned  
-- Signed  
-- Immutable once released  
+- Signed with checksums  
+- Immutable after release  
+- Audited on activation and rollback  
 - Tenant-scoped  
-- Audited when activated or rolled back  
 
-They provide the rule surface the runtime enforces.
+Each pack contains:
+
+- Category definitions  
+- Modality rules  
+- Regulatory profiles  
+- Safety boundaries  
+- Checksum metadata  
+
+Policy Packs determine the behavior of both runtime arms.
 
 ---
 
-# 🏛 6. Enterprise Runtime Differences
+# 🏛 6. Enterprise Runtime Extensions
 
-The open-source Core Runtime and the Enterprise Runtime share the same evaluation engine.  
-Enterprise adds operational, governance, and compliance features.
+Enterprise builds on Core by adding:
 
-### Enterprise adds:
-- Admin Console (UI)  
-- Tenant isolation controls  
-- RBAC  
-- Retention + evidence bundles  
+- Tenant isolation  
+- RBAC and operator roles  
+- Admin Console  
+- Retention and evidence bundling  
 - Audit dashboards  
-- Signed artifacts and SBOMs  
+- Signed SBOM artifacts  
 - Advanced rate limiting and DLQ controls  
 
-### Core provides:
-- Dual-arm policy enforcement  
-- Clarify-first workflows  
-- Verifier integration  
-- Policy Pack execution  
-- All evaluation logic  
-
-Enterprise enhances, not replaces, the core runtime.
+The evaluation engine remains identical to Core.
 
 ---
 
 # 🔐 7. Audit Logging
 
-Every major action is logged with structured metadata:
+Guardrail emits structured audit logs for:
 
-- Sanitization notes  
+- Sanitization signals  
 - Policy decisions  
-- Clarifications  
-- Blocks and overrides  
-- Egress-level decisions  
-- Verifier involvement  
-- Admin actions (Enterprise only)  
+- Clarification events  
+- Verifier usage  
+- Blocked or redacted responses  
+- Administrative actions (Enterprise)  
+- Modality metadata  
 
-Audit logs serve as evidence for:
-- Security teams  
-- Compliance programs  
-- Incident reviews  
-- Governance reporting  
-
-Enterprise deployments may export evidence bundles.
+Audit logs support security investigations and governance programs.
 
 ---
 
-# 🌐 8. Runtime Configuration
+# 🌐 8. Configuration
 
-Guardrail runtimes can be configured via environment variables:
+Guardrail supports environment-based configuration for:
 
-Common settings include:
-- LLM provider credentials  
-- Redis connection  
-- Policy pack paths  
+- LLM provider settings  
+- Redis integration  
+- Policy Pack sources  
+- Verifier endpoints  
 - Tenant configuration  
-- Verifier endpoint (optional)  
+- Observability settings  
 
-Enterprise deployments add:
-- Retention settings  
-- Admin UI configuration  
-- Object storage endpoints  
-- RBAC and IAM integration  
+Enterprise adds:
 
-Configuration is declarative and designed for container-first deployment.
+- Retention  
+- Admin UI config  
+- Object store backends  
+- RBAC and IAM settings  
 
 ---
 
-# 🧪 9. Runtime Guarantees (Clarifications)
+# 🧪 9. Runtime Positioning
 
-Guardrail does **not** guarantee safety or compliance.  
-But it does provide:
-
-- A structured evaluation layer  
-- Defense-in-depth against unsafe prompt patterns  
-- Controls that reduce risk of model degradation  
-- Oversight for dangerous or non-compliant outputs  
-- A governance trail for investigations  
-
-The runtime supports organizational policy, not a replacement for it.
+Guardrail does not guarantee safety or compliance.  
+It provides a configurable evaluation and governance layer that helps
+organizations reduce risk, maintain visibility, and support policy-aligned AI use.
 
 ---
 
 # 🆘 10. Support
 
-For runtime assistance or onboarding:
-
-- **enterprise@guardrailapi.com**  
-- **security@guardrailapi.com**
+General inquiries: **enterprise@guardrailapi.com**  
+Security disclosures: **security@guardrailapi.com**
 
 ---
-
-*This document describes runtime behavior for both the open-source Core
-edition and the enterprise governance edition.*
