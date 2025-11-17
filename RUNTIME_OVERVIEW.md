@@ -36,37 +36,49 @@ is degraded or rate-limited.
 
 # ✨ 2. Request Lifecycle (Ingress)
 
-When a user sends a prompt through Guardrail:
+When a client sends a request through Guardrail, the runtime evaluates **all
+modalities**, not just text. Guardrail inspects and applies policy to:
 
-### Step 1 — Normalization & Sanitization
-The runtime performs:
-- Unicode normalization  
-- Confusables / homoglyph checks  
-- Simple pattern checks for obfuscation  
+- text prompts  
+- images  
+- audio streams  
+- uploaded files and documents  
+- JSON payloads or structured inputs  
+- model-specific tool-call or function-call envelopes  
 
-Signals are attached to the evaluation context.
+All modalities pass through the same governance pipeline.
 
-### Step 2 — Policy Pack Evaluation
-Policies determine:
-- Allowed categories  
-- Disallowed patterns  
-- Required clarifications  
-- Regulatory boundaries  
+## Step 1 — Normalization & Sanitization
+Guardrail performs modality-appropriate preprocessing, which may include:
 
-If a rule triggers clarification → move to Step 3.  
-If a rule triggers immediate denial → block and log.  
-If allowed → proceed normally.
+- text: Unicode normalization, confusables detection, obfuscation signals  
+- images: metadata stripping, format validation, safety category extraction  
+- audio: transcription stream extraction (if enabled), metadata validation  
+- files: MIME checking, structured content extraction, size and type limits  
 
-### Step 3 — Clarify-First Workflow
-If intent is ambiguous:
+Signals produced here feed into policy evaluation.
+
+## Step 2 — Policy Pack Evaluation
+Policy Packs determine:
+- allowed or disallowed categories  
+- modality-specific rules (e.g., image safety, file restrictions)  
+- requirements for clarification  
+- regulatory boundaries (e.g., PHI/PII constraints)  
+
+Rules are applied consistently across all modalities.
+
+## Step 3 — Clarify-First Workflow
+If intent or content is ambiguous:
 - The Verifier may be consulted for non-execution analysis  
-- If still unclear → the request is returned to the submitter  
-- The system does not guess user intent  
+- If ambiguity remains, the request is returned to the submitter  
+- Guardrail does not guess or assume intent  
 
-Only when intent is clear does the request proceed.
+This applies equally to text, images, audio, and file-based inputs.
 
-### Step 4 — Forward to LLM
-The sanitized, policy-checked prompt is sent to the configured LLM provider.
+## Step 4 — Forward to LLM
+Once evaluated and cleared, the request—regardless of modality—is forwarded to
+the configured model provider through the runtime’s enforcement layer.
+
 
 ---
 
