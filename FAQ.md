@@ -77,12 +77,26 @@ submitter for clarification.
 
 ---
 
-## 7. Is Guardrail a guarantee of AI safety or compliance?
+## 7. Does Guardrail guarantee AI safety or compliance?
 
-No.  
-Guardrail is a governance and policy enforcement layer. It provides signals,
-controls, and oversight designed to help reduce risk, but it cannot guarantee
-outcomes or replace an organization’s internal policies.
+No. Guardrail does not guarantee security, safety, or regulatory compliance.
+
+However, it *does* provide a structured layer designed to reduce risk.  
+Guardrail helps organizations address:
+
+- prompt injection and prompt tampering  
+- model degradation and “safety erosion” over time  
+- ambiguous or misleading user instructions  
+- unsafe or non-compliant model outputs  
+- governance boundaries around high-risk categories  
+
+Guardrail evaluates both ingress (prompts) and egress (responses) and applies
+policy, clarification, and verification steps that can reduce exposure to
+dangerous or non-compliant interactions.
+
+Guardrail strengthens governance; it does not replace internal security,
+monitoring, or organizational controls.
+
 
 ---
 
