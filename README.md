@@ -34,51 +34,56 @@ All other Guardrail components plug into this umbrella.
 
 ---
 
-## 🏗 Platform Components
+## 🧱 Platform Components
 
-The Guardrail platform is delivered through four coordinated repositories:
+Guardrail is delivered through four coordinated repositories maintained by
+Guardrail Labs:
 
-### **1. Umbrella & CLI (`llm-guardrail-api`)**
-This repo.  
-Provides:
+### **1. Core Runtime — `llm-guardrail-api-next` (Open Source)**  
+Dual-arm enforcement engine supporting:
+- multimodal ingress/egress evaluation  
+- policy pack execution  
+- clarify-first logic  
+- optional verifier integration  
 
-- MkDocs documentation portal  
-- `guardrailctl` CLI (installation, validation, rendering)  
-- Deployment templates and examples  
-- Architecture and integration docs  
+This is the foundation for all Guardrail deployments.
 
-### **2. Core Runtime (`llm-guardrail-api-next`)**
-Open-source enforcement engine providing:
+---
 
-- Ingress/egress mediation  
-- Policy evaluation  
-- Unicode/confusable detection  
-- Clarify-first verification workflow  
-- HMAC-signed audit logging  
+### **2. Enterprise Runtime — `llm-guardrail-api-enterprise` (Proprietary)**  
+Adds governance, compliance, and operational controls, including:
+- multi-tenant administration  
+- RBAC  
+- retention and evidence bundles  
+- audit dashboards  
+- signed artifacts and SBOMs  
+- enhanced rate limiting / DLQ / quotas  
 
-Ideal for local development, POCs, and lightweight deployments.
+The evaluation engine matches Core; Enterprise extends operations and governance.
 
-### **3. Enterprise Runtime (`llm-guardrail-api-enterprise`)**
-Private, commercially licensed edition with:
+---
 
-- Dual-arm circuit isolation  
-- Signed SBOM bundles & cosign artifacts  
-- Tenant-isolated policy namespaces  
-- Admin UI (incidents, appeals, packs, quotas)  
-- Compliance and retention tooling  
-- SOC 2 aligned controls  
+### **3. Verifier Service — `guardrail-verifier` (Source-Available)**  
+A non-execution intent-classification microservice used when requests are
+ambiguous.  
+Supports:
+- modality-aware intent analysis  
+- clarify-first workflows  
+- policy-driven ambiguity handling  
 
-Not publicly accessible; integrated through the CLI.
+The Verifier never executes user-submitted content.
 
-### **4. Policy Packs (`llm-guardrail-policy-packs`)**
-Curated, signed bundles of:
+---
 
-- Safety rules  
-- Regulatory profiles (GDPR, HIPAA, AI-Act)  
-- Industry presets  
-- Internal governance templates  
+### **4. Guardrail Policy Packs — `llm-guardrail-policy-packs` (Source-Available)**  
+Versioned, signed, auditable rule bundles containing:
+- safety categories  
+- modality rules (text/image/audio/file)  
+- regulatory profiles (GDPR, HIPAA, AI Act templates)  
+- organization-specific governance logic  
 
-Policy Packs can be promoted and versioned independently.
+Policy Packs define the rule surface the runtime enforces.
+
 
 ---
 
