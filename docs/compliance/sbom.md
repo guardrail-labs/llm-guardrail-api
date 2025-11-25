@@ -6,8 +6,8 @@ SBOMs are generated in CI at release and attached to GitHub Releases for:
 - Verifier Service
 
 Use these SBOMs for supplier risk reviews and compliance audits. If you need to regenerate them in
-your environment, run the verifier workflow against the release artifacts and export the CycloneDX
-files alongside the attestation bundle.
+your environment, run the SBOM workflow and export the CycloneDX files alongside the attestation 
+bundle.
 
 To obtain an SBOM:
 1. Download the release asset from your Guardrail artifact registry or GitHub Release page.
