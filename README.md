@@ -1,8 +1,8 @@
 # Guardrail API — Umbrella Project
 
 [![Docs](https://img.shields.io/badge/docs-live-blue)](https://guardrail-labs.github.io/llm-guardrail-api/)
-![Core](https://img.shields.io/badge/Core-1.5.0-green)
-![Enterprise](https://img.shields.io/badge/Enterprise-1.4.0-green)
+![Core](https://img.shields.io/badge/Core-1.6.0-green)
+![Enterprise](https://img.shields.io/badge/Enterprise-1.5.0-green)
 ![Verifier](https://img.shields.io/badge/Verifier-0.2.0-green)
 ![Policy Packs](https://img.shields.io/badge/Policy_Packs-1.0.0-green)
 
