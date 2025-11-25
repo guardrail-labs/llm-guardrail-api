@@ -30,11 +30,11 @@ Administrative actions that affect production—such as promoting a new policy p
 API key—can require dual approval. Configure approvers per workspace or organization. The UI tracks
 who requested and approved the change and exposes the audit record to the Verifier.
 
-## Notifications
+### Notifications
 
-Integrate the Admin UI with email, Slack, or Microsoft Teams to deliver approval requests and
-incident alerts. Notifications include deep links that direct reviewers back into the appropriate
-screen.
+The current release surfaces incidents and clarification requests directly in
+the Admin Console, where reviewers can triage and resolve them from the
+relevant views (traffic, clarifications, and tenants).
 
 ## Extensibility
 
