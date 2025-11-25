@@ -1,13 +1,18 @@
 # API Reference
 
-The Guardrail API exposes REST and event-based interfaces for managing tenants, policy packs,
-and runtime operations. This page summarizes the most commonly used endpoints. Consult the
-OpenAPI specification published with each runtime release for exhaustive details.
+The Guardrail API exposes REST interfaces for runtime decisions, health/status checks, and
+administrative usage reporting. Use the OpenAPI specification published with each runtime release
+for exhaustive details.
+
+**Outline**
+- Decision endpoints
+- Health and status endpoints
+- Admin and usage endpoints (Core 1.6.0)
 
 ## Authentication
 
-Requests require a workspace-scoped API token or a service account credential generated from
-the Admin UI.
+Requests require a workspace-scoped API token or a service account credential generated from the
+Admin UI.
 
 ```
 Authorization: Bearer <token>
@@ -17,37 +22,38 @@ X-Guardrail-Tenant: <workspace-id>
 Tokens are short-lived. Use the `/v1/auth/token` endpoint to exchange long-lived refresh tokens
 for access tokens when integrating with automation.
 
-## Tenants
+## Decision endpoints
 
 | Method | Endpoint | Description |
 | --- | --- | --- |
-| `GET` | `/v1/tenants` | List organizations and workspaces visible to the caller. |
-| `POST` | `/v1/tenants` | Create a new workspace within the caller's organization. |
-| `PATCH` | `/v1/tenants/{workspace}` | Update metadata, notification channels, or runtime quotas. |
-| `POST` | `/v1/tenants/{workspace}/members` | Invite a member and assign an RBAC role. |
-
-## Policy packs
-
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| `GET` | `/v1/packs` | List available packs and their deployment status. |
-| `POST` | `/v1/packs/promote` | Promote a verified pack version into the selected workspace. |
-| `POST` | `/v1/packs/rollback` | Roll back to a previous pack version. |
-| `GET` | `/v1/packs/{pack}/history` | Retrieve promotion history and verifier evidence. |
-
-## Runtime operations
-
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| `POST` | `/v1/runtime/test` | Execute a dry-run prompt against the configured policies. |
 | `POST` | `/v1/runtime/invoke` | Submit a prompt for policy evaluation and model routing. |
+| `POST` | `/v1/runtime/test` | Execute a dry-run prompt against the configured policies. |
 | `GET` | `/v1/runtime/logs` | Stream decision logs for monitoring and troubleshooting. |
-| `POST` | `/v1/runtime/tokens` | Rotate API tokens for workspace applications. |
+
+Responses include the headers `X-Guardrail-Decision`, `X-Guardrail-Mode`, and
+`X-Guardrail-Incident-ID` for correlation.
+
+## Health and status endpoints
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `GET` | `/healthz` | Liveness probe for the service container. |
+| `GET` | `/metrics` | Prometheus exposition for runtime counters and gauges. |
+| `GET` | `/openapi.json` | Published OpenAPI document for the running version. |
+
+## Admin and usage endpoints (Core 1.6.0)
+
+Core 1.6.0 introduces aggregated usage metrics consumed by the Enterprise Console.
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `GET` | `/v1/admin/usage/summary` | Aggregated usage by tenant and period for billing. |
+| `GET` | `/v1/admin/usage/events` | Normalized decision events for audit and analytics. |
 
 ## Webhooks and events
 
-Guardrail publishes structured events to your configured webhook endpoints. Events follow a
-JSON schema with the fields `type`, `tenant`, `timestamp`, and `payload`.
+Guardrail publishes structured events to your configured webhook endpoints. Events follow a JSON
+schema with the fields `type`, `tenant`, `timestamp`, and `payload`.
 
 Common event types include:
 
@@ -61,8 +67,8 @@ reliable feed.
 
 ## Rate limiting and quotas
 
-The runtime enforces per-workspace rate limits. Default limits are suitable for testing and can
-be increased through the Admin UI or API. Requests exceeding the limit receive a `429 Too Many
+The runtime enforces per-workspace rate limits. Default limits are suitable for testing and can be
+increased through the Admin UI or API. Requests exceeding the limit receive a `429 Too Many
 Requests` response with headers indicating when to retry.
 
 ## Error handling
@@ -79,5 +85,5 @@ Errors follow the RFC 7807 problem+json format. A sample error payload looks lik
 }
 ```
 
-Use the `instance` identifier when contacting support. It maps directly to decision logs stored
-in the event bus.
+Use the `instance` identifier when contacting support. It maps directly to decision logs stored in
+the event bus.

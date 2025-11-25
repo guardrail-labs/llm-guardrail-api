@@ -12,9 +12,9 @@ Use this page as your hub to navigate the full project.
 
 **Current Releases**
 
-- **Core:** [1.6.0](components/core.md)  
-- **Enterprise:** [1.5.0](components/enterprise.md)  
-- **Verifier:** [0.2.0](components/verifier.md)  
+- **Core:** [1.6.0](components/core.md)
+- **Enterprise:** [1.5.0](components/enterprise.md)
+- **Verifier:** [0.2.0](components/verifier.md)
 - **Policy Packs:** [1.0.0](policy-packs/index.md)
 
 > Version matrix: see `_includes/versions.md`
@@ -55,7 +55,7 @@ Run the Core runtime, create a tenant, and send your first decision request.
 - [Policy Pack Guide](policy-packs.md)
 
 ### **Security & Compliance**
-- [Clarify-First Blocking Model](security-model.md) *(optional future page)*  
+- [Clarify-First Blocking Model](security-model.md)
 - [SOC 2 Evidence Expectations](soc2-evidence.md)
 - [SBOM](compliance/sbom.md)
 - [Legal](legal.md)
@@ -83,8 +83,5 @@ flowchart LR
 Ingress Arm — Normalizes text, detects confusables, and classifies safety.
 Verifier — Assess-only microservice; never executes user code.
 Egress Arm — Filters outputs, redacts sensitive data, and protects against unsafe model behavior.
-
-Guardrail Labs, LLC — Patent Pending
-
 
 
