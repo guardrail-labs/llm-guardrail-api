@@ -20,7 +20,7 @@ https://github.com/guardrail-labs/llm-guardrail-api-next
 **Open Source (Apache 2.0 Licensed)**
 
 **Current Version:**  
-**1.5.0**
+**1.6.0**
 
 The Core Runtime is the foundational enforcement engine responsible for
 evaluating both **ingress** (requests) and **egress** (responses). It provides
@@ -54,7 +54,7 @@ Private (licensed customers only)
 **Proprietary / Commercial License**
 
 **Current Version:**  
-**1.4.0**
+**1.5.0**
 
 The Enterprise Runtime extends the Core with governance, compliance, and
 multi-tenancy features required for regulated, high-risk, or large-scale AI
