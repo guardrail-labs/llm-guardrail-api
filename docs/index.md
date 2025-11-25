@@ -1,25 +1,75 @@
-# Guardrail API — Docs Portal
+# Guardrail API — Documentation Portal
 
-Welcome to the Guardrail API umbrella documentation. This site brings together the
-operational guidance, architectural background, and governance controls that underpin the
-Guardrail platform. Use the navigation to explore the runtime, policy packs, verifier
-workflow, and supporting assets maintained across the Guardrail repositories.
+Welcome to the Guardrail API umbrella documentation. This site combines the
+operational guidance, architecture, components, policy packs, verifier workflow, and
+compliance materials that make up the Guardrail platform.
 
-**Versions:**  
-- [Core `1.5.0`](components/core.md)  
-- [Enterprise `1.4.0`](components/enterprise.md)  
-- [Verifier `0.2.0`](components/verifier.md)  
-- [Policy Packs `1.0.0`](policy-packs/index.md)
+Use this page as your hub to navigate the full project.
 
-- 👉 Start here: [Quickstart](quickstart.md)
+---
 
+## Versions
 
-**Guardrail Labs, LLC — Patent Pending**
+**Current Releases**
+
+- **Core:** [1.6.0](components/core.md)  
+- **Enterprise:** [1.5.0](components/enterprise.md)  
+- **Verifier:** [0.2.0](components/verifier.md)  
+- **Policy Packs:** [1.0.0](policy-packs/index.md)
+
+> Version matrix: see `_includes/versions.md`
+
+---
+
+## Start Here
+
+👉 **[Quickstart Guide](quickstart.md)**  
+Run the Core runtime, create a tenant, and send your first decision request.
+
+---
+
+## Documentation Sections
+
+### **Overview**
+- [Architecture](architecture.md)
+- [About Guardrail](about.md)
+- Components:
+  - [Core Runtime](components/core.md)
+  - [Enterprise Admin Console](components/enterprise.md)
+  - [Verifier Microservice](components/verifier.md)
+  - [Policy Packs](policy-packs/index.md)
+
+### **Core API**
+- [API Reference](api-reference.md)
+- [API Summary](api/summary.md)
+- [Tenants & RBAC](tenants-and-rbac.md)
+
+### **Enterprise Console**
+- [Admin UI Overview](admin-ui.md)
+- [Tenants and RBAC](tenants-and-rbac.md)
+- [Usage, Billing, and Metrics](components/enterprise.md)
+
+### **Policy Packs**
+- [Overview](policy-packs/index.md)
+- [Policy Pack Schema](policy-packs/schema.md)
+- [Policy Pack Guide](policy-packs.md)
+
+### **Security & Compliance**
+- [Clarify-First Blocking Model](security-model.md) *(optional future page)*  
+- [SOC 2 Evidence Expectations](soc2-evidence.md)
+- [SBOM](compliance/sbom.md)
+- [Legal](legal.md)
+
+### **Operations**
+- [Release Notes](release-notes.md)
+- [Troubleshooting](troubleshooting.md)
+
+---
 
 ## Clarify-First Architecture
 
-The Guardrail API follows a “clarify-first, then block” philosophy. Every ambiguous or
-potentially unsafe request is clarified before execution.
+Guardrail follows a “clarify-first, then block” philosophy. Ambiguous or potentially unsafe
+requests are clarified before execution.
 
 ```mermaid
 flowchart LR
@@ -30,21 +80,11 @@ flowchart LR
   LLM --> EG[Egress Arm<br/>Filter + Redact]
   EG -->|Response| U
 ```
+Ingress Arm — Normalizes text, detects confusables, and classifies safety.
+Verifier — Assess-only microservice; never executes user code.
+Egress Arm — Filters outputs, redacts sensitive data, and protects against unsafe model behavior.
 
-Ingress Arm — Normalizes text, detects confusables, and classifies safety. Unclear or
-borderline requests are sent to the Verifier.
+Guardrail Labs, LLC — Patent Pending
 
-Verifier — An assess-only microservice that never executes user code; it determines whether a
-request is safe, needs clarification, or should be blocked.
 
-Egress Arm — Filters model outputs, redacts sensitive or non-compliant data, and protects users
-even when ingress is degraded (dual-arm resilience).
 
-- **What is Guardrail?** A real-time safety & compliance firewall for LLMs with clarify-first policy enforcement.
-- **Components**
-  - [Core Runtime](components/core.md)
-  - [Enterprise Admin Console](components/enterprise.md)
-  - [Verifier Microservice](components/verifier.md)
-  - [Policy Packs](policy-packs/index.md)
-
----
