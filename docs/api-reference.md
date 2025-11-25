@@ -87,3 +87,6 @@ Errors follow the RFC 7807 problem+json format. A sample error payload looks lik
 
 Use the `instance` identifier when contacting support. It maps directly to decision logs stored in
 the event bus.
+---
+
+**Guardrail Labs, LLC — Patent Pending**

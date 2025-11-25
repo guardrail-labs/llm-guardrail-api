@@ -48,3 +48,6 @@ When auditors request evidence, provide:
 
 These assets demonstrate that Guardrail maintains continuous compliance and that every release
 is governed by rigorous verification.
+---
+
+**Guardrail Labs, LLC — Patent Pending**

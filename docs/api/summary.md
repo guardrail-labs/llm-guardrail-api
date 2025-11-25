@@ -10,3 +10,6 @@ for full details and payload schemas.
 | Metrics | [`GET /metrics`](../api-reference.md#health-and-status-endpoints) | Prometheus metrics including usage counters. |
 | Admin Usage | [`GET /v1/admin/usage/summary`](../api-reference.md#admin-and-usage-endpoints-core-160) | Core 1.6.0 aggregated usage for billing periods. |
 | Events | [`/v1/events/subscriptions`](../api-reference.md#webhooks-and-events) | Manage webhook subscriptions for decision and admin events. |
+---
+
+**Guardrail Labs, LLC — Patent Pending**

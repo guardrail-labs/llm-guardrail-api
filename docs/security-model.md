@@ -8,3 +8,6 @@ returns a clarifying response, a block decision, or approval to continue.
 This flow keeps potentially unsafe prompts from executing while minimizing false positives. The
 same pattern applies to egress responses so redaction and filtering can remove sensitive content
 before it is delivered back to the caller.
+---
+
+**Guardrail Labs, LLC — Patent Pending**

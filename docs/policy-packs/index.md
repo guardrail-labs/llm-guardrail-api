@@ -32,3 +32,6 @@ fixes.
 ## Schema validation
 Validation tooling (for example, `python tools/validate_packs.py`) enforces manifest presence and
 schema conformance before packs are published.
+---
+
+**Guardrail Labs, LLC — Patent Pending**

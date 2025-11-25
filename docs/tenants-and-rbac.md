@@ -47,3 +47,6 @@ External identity provider integration (e.g., SAML or OIDC) is planned but not p
 
 Guardrail records decision, clarification, and usage events.
 RBAC changes are not currently logged as audit events in this release.
+---
+
+**Guardrail Labs, LLC — Patent Pending**

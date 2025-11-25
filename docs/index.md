@@ -85,3 +85,6 @@ Verifier — Assess-only microservice; never executes user code.
 Egress Arm — Filters outputs, redacts sensitive data, and protects against unsafe model behavior.
 
 
+---
+
+**Guardrail Labs, LLC — Patent Pending**

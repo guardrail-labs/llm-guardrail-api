@@ -63,3 +63,6 @@ curl -sS http://127.0.0.1:8081/openapi.json | jq '.info.version'
 ## Note
 - Versions used above: Core `1.6.0`, Enterprise `1.5.0`, Verifier `0.2.0`.
 - If you change ports or run behind a proxy, update the curl targets accordingly.
+---
+
+**Guardrail Labs, LLC — Patent Pending**

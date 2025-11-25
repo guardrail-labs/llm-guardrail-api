@@ -11,3 +11,6 @@ and working with aggregated usage metrics emitted by Core 1.6.0.
 - `/admin/compliance/packs` CRUD (CSRF required)
 - `/admin/tenants` for tenant lifecycle operations
 - `/metrics` includes enterprise counters and histograms aligned to core modes
+---
+
+**Guardrail Labs, LLC — Patent Pending**

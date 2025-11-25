@@ -16,3 +16,6 @@ status. Core expects the following fields for packs targeting Policy Packs 1.0.0
 
 The validator enforces manifest presence, semantic version formatting, and required compatibility
 fields before a pack can be promoted.
+---
+
+**Guardrail Labs, LLC — Patent Pending**

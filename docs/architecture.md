@@ -48,3 +48,6 @@ clusters.
 The Guardrail platform intentionally splits code across repositories so each artifact can be
 versioned and governed independently. Review the [Overview](index.md) page for a description of
 how this repository coordinates runtime, UI, verifier, and policy pack updates.
+---
+
+**Guardrail Labs, LLC — Patent Pending**

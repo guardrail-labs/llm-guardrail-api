@@ -17,3 +17,6 @@ Guardrail Enterprise Console.
 **Admin and Usage (v1.6.0)**
 - `/v1/admin/usage/summary` — aggregated tenant usage for billing periods.
 - `/v1/admin/usage/events` — normalized decision events used by the Enterprise Console.
+---
+
+**Guardrail Labs, LLC — Patent Pending**
