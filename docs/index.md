@@ -1,6 +1,6 @@
 # Guardrail API — Documentation Portal
 
-Welcome to the Guardrail API umbrella documentation. This site combines the
+Welcome to the Guardrail API documentation. This site combines the
 operational guidance, architecture, components, policy packs, verifier workflow, and
 compliance materials that make up the Guardrail platform.
 
