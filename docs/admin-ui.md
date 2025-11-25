@@ -30,7 +30,7 @@ Administrative actions that affect production—such as promoting a new policy p
 API key—can require dual approval. Configure approvers per workspace or organization. The UI tracks
 who requested and approved the change and exposes the audit record to the Verifier.
 
-### Notifications
+## Notifications
 
 The current release surfaces incidents and clarification requests directly in
 the Admin Console, where reviewers can triage and resolve them from the
