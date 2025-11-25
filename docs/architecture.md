@@ -1,8 +1,8 @@
-# Architecture
+# Guardrail Architecture
 
-Guardrail API is designed as a modular control plane that can mediate large language model
-requests, enforce policy, and produce audit evidence. The platform is composed of the
-following services and artifacts.
+Guardrail API is designed as a modular control plane that mediates large language model requests,
+enforces policy, and produces audit evidence. The platform is composed of the following services
+and artifacts.
 
 ## Runtime services
 
@@ -47,4 +47,4 @@ clusters.
 
 The Guardrail platform intentionally splits code across repositories so each artifact can be
 versioned and governed independently. Review the [Overview](index.md) page for a description of
-how the umbrella repository coordinates runtime, UI, verifier, and policy pack updates.
+how this repository coordinates runtime, UI, verifier, and policy pack updates.

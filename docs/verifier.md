@@ -1,48 +1,30 @@
 # Verifier
 
-The Guardrail Verifier is a command-line workflow that validates runtime and policy pack
-artifacts before they are promoted to regulated environments. It provides cryptographic
-attestation, SBOM generation, and evidence packaging aligned with SOC 2 requirements.
+The Guardrail Verifier is an assess-only service used when prompts are ambiguous or high-risk. It
+reviews requests before they reach a model and issues allow, deny, or clarify guidance without
+executing user-supplied code.
 
-## When to run the Verifier
+## When to use the Verifier
 
-* Before promoting a new runtime release to staging or production.
-* When adding or updating policy packs that contain new rules or dependencies.
-* Prior to a quarterly SOC 2 control review to ensure evidence is complete.
+- Ingress requests that contain unclear intent or potentially unsafe instructions.
+- Workloads that require an additional review step before invoking upstream models.
+- Tenants that prefer clarify-first workflows to reduce false positives from strict blocking.
 
-## Requirements
+## Request flow
 
-* Access to the artifact registry that hosts Guardrail images or policy pack bundles.
-* The `guardrailctl` CLI or standalone verifier binary.
-* Trusted root certificates used to validate Guardrail signing keys.
+1. Core detects an ambiguous prompt and forwards the payload to the Verifier endpoint.
+2. The Verifier evaluates the content using configured providers and returns an allow/deny/clarify
+   decision with rationale.
+3. Core applies the decision and records the result in decision logs for audit.
 
-## Running the verifier
+## Deployment notes
 
-```bash
-guardrailctl verify --edition enterprise --tag v1.0.0-GA --output ./evidence
-```
+- Runs as a separate service (`guardrail-verifier:0.2.0`) alongside Core and Enterprise.
+- Never executes user code or untrusted extensions; it performs assessments only.
+- Exposes `/healthz`, `/metrics`, and `POST /verify` for status and decisions.
 
-The command performs the following checks:
+## Operations
 
-1. Downloads the manifest for the requested release.
-2. Validates container signatures and compares digests.
-3. Generates a CycloneDX SBOM for each artifact.
-4. Writes an attestation bundle (`attestation.json`) and summary report (`report.md`).
-
-The evidence directory can be uploaded to your change request ticket, stored in a GRC tool, or
-attached to an internal audit package.
-
-## Automating verification
-
-Integrate the verifier into CI/CD pipelines to block deployments when evidence is missing or
-signatures are invalid. The CLI exits with a non-zero status if any check fails, making it easy
-to wire into GitHub Actions, GitLab CI, or Jenkins pipelines.
-
-## Troubleshooting
-
-* **Signature mismatch** – Ensure your verifier has the latest Guardrail public keys. Rotate
-  keys annually and distribute them through your secrets manager.
-* **Missing SBOM** – Rebuild the artifact with the SBOM generation flag enabled. Enterprise
-  pipelines enforce this automatically.
-* **Connectivity failures** – If operating in a restricted network, mirror the artifacts to an
-  internal registry and point the verifier to the mirror URL.
+Monitor `verifier_requests_total` and `verifier_latency_seconds` metrics to track throughput and
+performance. Breaker state counters indicate when a provider has been taken out of rotation after a
+failure.
