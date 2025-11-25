@@ -148,8 +148,8 @@ guardrailctl helm render --out ./manifests
 
 | Component                  | Version | License Type                           | Notes                                      |
 |---------------------------|---------|-----------------------------------------|--------------------------------------------|
-| Core Runtime              | 1.5.0   | Apache 2.0 (Open Source)                | Dual-arm mediation engine                  |
-| Enterprise Runtime        | 1.4.0   | Proprietary (Commercial)                | Governance, multi-tenancy, admin console   |
+| Core Runtime              | 1.6.0   | Apache 2.0 (Open Source)                | Dual-arm mediation engine                  |
+| Enterprise Runtime        | 1.5.0   | Proprietary (Commercial)                | Governance, multi-tenancy, admin console   |
 | Verifier Service          | 0.2.0   | Proprietary (Source-Available)          | Non-execution intent classification        |
 | Policy Packs              | 1.0.0   | Proprietary (Source-Available)          | Governance + safety rule bundles           |
 | Umbrella / CLI            | (latest) | MIT (Open Source)                       | Deployment tooling + docs portal           |
