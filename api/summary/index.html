@@ -1013,7 +1013,44 @@
 
 
 <h1 id="api-summary">API Summary<a class="headerlink" href="#api-summary" title="Permanent link">&para;</a></h1>
-<p><em>Run <code>python tools/generate_api_summary.py</code> to refresh this file with the latest service metadata.</em></p>
+<p>Use this page as a quick index into the runtime endpoints. See the <a href="../../api-reference/">API Reference</a>
+for full details and payload schemas.</p>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Endpoints</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decisions</td>
+<td><a href="../../api-reference/#decision-endpoints"><code>POST /v1/runtime/invoke</code></a></td>
+<td>Primary decision path with policy evaluation.</td>
+</tr>
+<tr>
+<td>Health</td>
+<td><a href="../../api-reference/#health-and-status-endpoints"><code>GET /healthz</code></a></td>
+<td>Liveness probe for deployments and smoke tests.</td>
+</tr>
+<tr>
+<td>Metrics</td>
+<td><a href="../../api-reference/#health-and-status-endpoints"><code>GET /metrics</code></a></td>
+<td>Prometheus metrics including usage counters.</td>
+</tr>
+<tr>
+<td>Admin Usage</td>
+<td><a href="../../api-reference/#admin-and-usage-endpoints-core-160"><code>GET /v1/admin/usage/summary</code></a></td>
+<td>Core 1.6.0 aggregated usage for billing periods.</td>
+</tr>
+<tr>
+<td>Events</td>
+<td><a href="../../api-reference/#webhooks-and-events"><code>/v1/events/subscriptions</code></a></td>
+<td>Manage webhook subscriptions for decision and admin events.</td>
+</tr>
+</tbody>
+</table>
 
 
 

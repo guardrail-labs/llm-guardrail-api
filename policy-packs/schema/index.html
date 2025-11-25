@@ -1013,12 +1013,22 @@
 
 
 <h1 id="policy-pack-schema">Policy Pack Schema<a class="headerlink" href="#policy-pack-schema" title="Permanent link">&para;</a></h1>
+<p>The manifest for each pack is a YAML document that declares identity, compatibility, and lifecycle
+status. Core expects the following fields for packs targeting Policy Packs 1.0.0:</p>
 <ul>
-<li><strong>version</strong> and <strong>schema</strong> must be SemVer (<code>MAJOR.MINOR.PATCH</code>).</li>
-<li><strong>compat.core / compat.enterprise</strong>: required, semver ranges.</li>
-<li><strong>status</strong>: <code>stable | beta | deprecated</code>.</li>
+<li><strong>name</strong> <em>(string)</em> – Human-readable pack name.</li>
+<li><strong>id</strong> <em>(string)</em> – Stable identifier used when loading the pack into Core.</li>
+<li><strong>version</strong> <em>(semver)</em> – Pack version such as <code>1.0.0</code>.</li>
+<li><strong>schema</strong> <em>(semver)</em> – Schema version supported by the runtime (<code>1.0.0</code>).</li>
+<li><strong>status</strong> <em>(enum)</em> – <code>stable</code>, <code>beta</code>, or <code>deprecated</code>.</li>
+<li><strong>compat.core</strong> <em>(semver range)</em> – Minimum Core runtime version required (e.g., <code>&gt;=1.6.0</code>).</li>
+<li><strong>compat.enterprise</strong> <em>(semver range)</em> – Minimum Enterprise Console version required (e.g.,
+  <code>&gt;=1.5.0</code>).</li>
+<li><strong>summary</strong> <em>(string)</em> – Short description of the ruleset and coverage.</li>
+<li><strong>artifacts</strong> <em>(list, when used)</em> – Additional files or models the pack depends on.</li>
 </ul>
-<p>The validator enforces manifest presence and schema conformance.</p>
+<p>The validator enforces manifest presence, semantic version formatting, and required compatibility
+fields before a pack can be promoted.</p>
 
 
 

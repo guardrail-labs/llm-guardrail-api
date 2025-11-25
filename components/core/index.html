@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#core-runtime-v150" class="md-skip">
+        <a href="#guardrail-core-runtime" class="md-skip">
           Skip to content
         </a>
       
@@ -1012,19 +1012,22 @@
   
 
 
-<blockquote>
-<p>Guardrail Labs, LLC — Patent Pending</p>
-</blockquote>
-<h1 id="core-runtime-v150">Core Runtime (v1.5.0)<a class="headerlink" href="#core-runtime-v150" title="Permanent link">&para;</a></h1>
+<h1 id="guardrail-core-runtime">Guardrail Core Runtime<a class="headerlink" href="#guardrail-core-runtime" title="Permanent link">&para;</a></h1>
+<p>Guardrail Core (v1.6.0) is the enforcement engine that handles ingress and egress filtering,
+executes policy packs, and emits decision events. It powers both standalone deployments and the
+Guardrail Enterprise Console.</p>
 <ul>
-<li><strong>Purpose:</strong> Enforcement engine (ingress/egress), policy execution, audit events.</li>
-<li><strong>Status:</strong> GA, feature-complete; patches/hotfixes only.</li>
-<li><strong>OpenAPI:</strong> exposed by core service at <code>/openapi.json</code> (CI smoke verified).</li>
+<li><strong>Purpose:</strong> Ingress/egress enforcement, policy execution, audit events, and usage aggregation.</li>
+<li><strong>Status:</strong> GA with usage aggregation and admin usage endpoints available in v1.6.0.</li>
+<li><strong>OpenAPI:</strong> exposed by the core service at <code>/openapi.json</code>.</li>
 </ul>
 <p><strong>Key Headers</strong>
 - <code>X-Guardrail-Decision</code> • <code>X-Guardrail-Mode</code> • <code>X-Guardrail-Incident-ID</code></p>
 <p><strong>Health &amp; Metrics</strong>
 - <code>/healthz</code> • <code>/metrics</code> (Prometheus exposition)</p>
+<p><strong>Admin and Usage (v1.6.0)</strong>
+- <code>/v1/admin/usage/summary</code> — aggregated tenant usage for billing periods.
+- <code>/v1/admin/usage/events</code> — normalized decision events used by the Enterprise Console.</p>
 
 
 

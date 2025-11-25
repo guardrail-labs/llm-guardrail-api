@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#verifier-microservice-v020" class="md-skip">
+        <a href="#guardrail-verifier-service" class="md-skip">
           Skip to content
         </a>
       
@@ -1012,14 +1012,14 @@
   
 
 
-<blockquote>
-<p>Guardrail Labs, LLC — Patent Pending</p>
-</blockquote>
-<h1 id="verifier-microservice-v020">Verifier Microservice (v0.2.0)<a class="headerlink" href="#verifier-microservice-v020" title="Permanent link">&para;</a></h1>
+<h1 id="guardrail-verifier-service">Guardrail Verifier Service<a class="headerlink" href="#guardrail-verifier-service" title="Permanent link">&para;</a></h1>
+<p>The Verifier Service (v0.2.0) is an assess-only component used for ambiguous or high-risk
+prompts. It reviews requests before execution and returns allow, deny, or clarify responses
+without running user-supplied code.</p>
 <ul>
-<li><strong>Purpose:</strong> Assess ambiguous intent with provider failover; no code execution.</li>
+<li><strong>Purpose:</strong> Assess ambiguous intent with configurable provider failover; no code execution.</li>
 <li><strong>Fallback Chain:</strong> Gemini → Claude → GPT (configurable).</li>
-<li><strong>Breaker:</strong> Opens on provider failure; requests short-circuit to next provider.</li>
+<li><strong>Breaker:</strong> Opens on provider failure; requests short-circuit to the next provider.</li>
 </ul>
 <p><strong>Metrics</strong>
 - <code>verifier_requests_total</code>, <code>verifier_latency_seconds</code>, provider breaker state counters.</p>

@@ -985,10 +985,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#when-to-run-the-verifier" class="md-nav__link">
+  <a href="#when-to-use-the-verifier" class="md-nav__link">
     <span class="md-ellipsis">
       
-        When to run the Verifier
+        When to use the Verifier
       
     </span>
   </a>
@@ -996,10 +996,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
+  <a href="#request-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Requirements
+        Request flow
       
     </span>
   </a>
@@ -1007,10 +1007,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-the-verifier" class="md-nav__link">
+  <a href="#deployment-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Running the verifier
+        Deployment notes
       
     </span>
   </a>
@@ -1018,21 +1018,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#automating-verification" class="md-nav__link">
+  <a href="#operations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Automating verification
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
+        Operations
       
     </span>
   </a>
@@ -1060,46 +1049,32 @@
 
 
 <h1 id="verifier">Verifier<a class="headerlink" href="#verifier" title="Permanent link">&para;</a></h1>
-<p>The Guardrail Verifier is a command-line workflow that validates runtime and policy pack
-artifacts before they are promoted to regulated environments. It provides cryptographic
-attestation, SBOM generation, and evidence packaging aligned with SOC 2 requirements.</p>
-<h2 id="when-to-run-the-verifier">When to run the Verifier<a class="headerlink" href="#when-to-run-the-verifier" title="Permanent link">&para;</a></h2>
+<p>The Guardrail Verifier is an assess-only service used when prompts are ambiguous or high-risk. It
+reviews requests before they reach a model and issues allow, deny, or clarify guidance without
+executing user-supplied code.</p>
+<h2 id="when-to-use-the-verifier">When to use the Verifier<a class="headerlink" href="#when-to-use-the-verifier" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Before promoting a new runtime release to staging or production.</li>
-<li>When adding or updating policy packs that contain new rules or dependencies.</li>
-<li>Prior to a quarterly SOC 2 control review to ensure evidence is complete.</li>
+<li>Ingress requests that contain unclear intent or potentially unsafe instructions.</li>
+<li>Workloads that require an additional review step before invoking upstream models.</li>
+<li>Tenants that prefer clarify-first workflows to reduce false positives from strict blocking.</li>
 </ul>
-<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Access to the artifact registry that hosts Guardrail images or policy pack bundles.</li>
-<li>The <code>guardrailctl</code> CLI or standalone verifier binary.</li>
-<li>Trusted root certificates used to validate Guardrail signing keys.</li>
-</ul>
-<h2 id="running-the-verifier">Running the verifier<a class="headerlink" href="#running-the-verifier" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>guardrailctl<span class="w"> </span>verify<span class="w"> </span>--edition<span class="w"> </span>enterprise<span class="w"> </span>--tag<span class="w"> </span>v1.0.0-GA<span class="w"> </span>--output<span class="w"> </span>./evidence
-</code></pre></div>
-<p>The command performs the following checks:</p>
+<h2 id="request-flow">Request flow<a class="headerlink" href="#request-flow" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Downloads the manifest for the requested release.</li>
-<li>Validates container signatures and compares digests.</li>
-<li>Generates a CycloneDX SBOM for each artifact.</li>
-<li>Writes an attestation bundle (<code>attestation.json</code>) and summary report (<code>report.md</code>).</li>
+<li>Core detects an ambiguous prompt and forwards the payload to the Verifier endpoint.</li>
+<li>The Verifier evaluates the content using configured providers and returns an allow/deny/clarify
+   decision with rationale.</li>
+<li>Core applies the decision and records the result in decision logs for audit.</li>
 </ol>
-<p>The evidence directory can be uploaded to your change request ticket, stored in a GRC tool, or
-attached to an internal audit package.</p>
-<h2 id="automating-verification">Automating verification<a class="headerlink" href="#automating-verification" title="Permanent link">&para;</a></h2>
-<p>Integrate the verifier into CI/CD pipelines to block deployments when evidence is missing or
-signatures are invalid. The CLI exits with a non-zero status if any check fails, making it easy
-to wire into GitHub Actions, GitLab CI, or Jenkins pipelines.</p>
-<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h2 id="deployment-notes">Deployment notes<a class="headerlink" href="#deployment-notes" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Signature mismatch</strong> – Ensure your verifier has the latest Guardrail public keys. Rotate
-  keys annually and distribute them through your secrets manager.</li>
-<li><strong>Missing SBOM</strong> – Rebuild the artifact with the SBOM generation flag enabled. Enterprise
-  pipelines enforce this automatically.</li>
-<li><strong>Connectivity failures</strong> – If operating in a restricted network, mirror the artifacts to an
-  internal registry and point the verifier to the mirror URL.</li>
+<li>Runs as a separate service (<code>guardrail-verifier:0.2.0</code>) alongside Core and Enterprise.</li>
+<li>Never executes user code or untrusted extensions; it performs assessments only.</li>
+<li>Exposes <code>/healthz</code>, <code>/metrics</code>, and <code>POST /verify</code> for status and decisions.</li>
 </ul>
+<h2 id="operations">Operations<a class="headerlink" href="#operations" title="Permanent link">&para;</a></h2>
+<p>Monitor <code>verifier_requests_total</code> and <code>verifier_latency_seconds</code> metrics to track throughput and
+performance. Breaker state counters indicate when a provider has been taken out of rotation after a
+failure.</p>
 
 
 

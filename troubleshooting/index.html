@@ -985,6 +985,39 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#cannot-reach-core-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cannot reach Core API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#no-usage-data-appearing-in-enterprise-console" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        No usage data appearing in Enterprise Console
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tenant-appears-misconfigured" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tenant appears misconfigured
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#ports-already-in-use" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1060,21 +1093,30 @@
 
 
 <h1 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h1>
+<h2 id="cannot-reach-core-api">Cannot reach Core API<a class="headerlink" href="#cannot-reach-core-api" title="Permanent link">&para;</a></h2>
+<p>Verify the container is running and listening on the expected port (<code>/healthz</code> should return 200).
+If you are routing through a proxy, ensure <code>X-Guardrail-Tenant</code> headers are preserved.</p>
+<h2 id="no-usage-data-appearing-in-enterprise-console">No usage data appearing in Enterprise Console<a class="headerlink" href="#no-usage-data-appearing-in-enterprise-console" title="Permanent link">&para;</a></h2>
+<p>Core 1.6.0 exports aggregated metrics via <code>/v1/admin/usage/summary</code>. Confirm the Enterprise Console
+is pointed at the correct Core URL and that recent traffic exists for the selected tenant.</p>
+<h2 id="tenant-appears-misconfigured">Tenant appears misconfigured<a class="headerlink" href="#tenant-appears-misconfigured" title="Permanent link">&para;</a></h2>
+<p>List tenants through the Admin UI or <code>GET /v1/tenants</code> and confirm the workspace identifier in your
+headers matches an existing tenant. Regenerate API keys if they were rotated.</p>
 <h2 id="ports-already-in-use">Ports already in use<a class="headerlink" href="#ports-already-in-use" title="Permanent link">&para;</a></h2>
-<p>Change the <code>-p HOST:CONTAINER</code> mappings (for example, <code>-p 18080:8080</code>) and update the curl
-commands to match.</p>
+<p>Change the <code>-p HOST:CONTAINER</code> mappings (for example, <code>-p 18080:8080</code>) and update the curl commands
+to match.</p>
 <h2 id="openapi-returns-404">OpenAPI returns 404<a class="headerlink" href="#openapi-returns-404" title="Permanent link">&para;</a></h2>
 <p>Ensure the service is healthy by checking <code>/healthz</code> and verify you are sending requests to the
 correct port.</p>
 <h2 id="metrics-empty">Metrics empty<a class="headerlink" href="#metrics-empty" title="Permanent link">&para;</a></h2>
-<p>Wait a few seconds after startup; some counters publish on first use. Trigger a trivial request
-to populate the feed.</p>
+<p>Wait a few seconds after startup; some counters publish on first use. Trigger a trivial request to
+populate the feed.</p>
 <h2 id="enterprise-csrf-routes">Enterprise CSRF routes<a class="headerlink" href="#enterprise-csrf-routes" title="Permanent link">&para;</a></h2>
 <p>Admin <code>POST</code> or <code>DELETE</code> endpoints require CSRF tokens. Use <code>GET</code> endpoints for smoke checks or
 supply the expected headers.</p>
 <h2 id="verifier-timeouts">Verifier timeouts<a class="headerlink" href="#verifier-timeouts" title="Permanent link">&para;</a></h2>
-<p>The Verifier fails closed. If a provider is down the breaker opens and requests fall back.
-Inspect <code>verifier_*</code> metrics for <code>breaker_open</code> counters.</p>
+<p>The Verifier fails closed. If a provider is down the breaker opens and requests fall back. Inspect
+<code>verifier_*</code> metrics for <code>breaker_open</code> counters.</p>
 
 
 

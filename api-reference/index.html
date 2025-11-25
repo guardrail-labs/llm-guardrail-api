@@ -898,10 +898,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tenants" class="md-nav__link">
+  <a href="#decision-endpoints" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tenants
+        Decision endpoints
       
     </span>
   </a>
@@ -909,10 +909,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#policy-packs" class="md-nav__link">
+  <a href="#health-and-status-endpoints" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Policy packs
+        Health and status endpoints
       
     </span>
   </a>
@@ -920,10 +920,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#runtime-operations" class="md-nav__link">
+  <a href="#admin-and-usage-endpoints-core-160" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Runtime operations
+        Admin and usage endpoints (Core 1.6.0)
       
     </span>
   </a>
@@ -1126,10 +1126,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tenants" class="md-nav__link">
+  <a href="#decision-endpoints" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tenants
+        Decision endpoints
       
     </span>
   </a>
@@ -1137,10 +1137,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#policy-packs" class="md-nav__link">
+  <a href="#health-and-status-endpoints" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Policy packs
+        Health and status endpoints
       
     </span>
   </a>
@@ -1148,10 +1148,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#runtime-operations" class="md-nav__link">
+  <a href="#admin-and-usage-endpoints-core-160" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Runtime operations
+        Admin and usage endpoints (Core 1.6.0)
       
     </span>
   </a>
@@ -1212,18 +1212,22 @@
 
 
 <h1 id="api-reference">API Reference<a class="headerlink" href="#api-reference" title="Permanent link">&para;</a></h1>
-<p>The Guardrail API exposes REST and event-based interfaces for managing tenants, policy packs,
-and runtime operations. This page summarizes the most commonly used endpoints. Consult the
-OpenAPI specification published with each runtime release for exhaustive details.</p>
+<p>The Guardrail API exposes REST interfaces for runtime decisions, health/status checks, and
+administrative usage reporting. Use the OpenAPI specification published with each runtime release
+for exhaustive details.</p>
+<p><strong>Outline</strong>
+- Decision endpoints
+- Health and status endpoints
+- Admin and usage endpoints (Core 1.6.0)</p>
 <h2 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h2>
-<p>Requests require a workspace-scoped API token or a service account credential generated from
-the Admin UI.</p>
+<p>Requests require a workspace-scoped API token or a service account credential generated from the
+Admin UI.</p>
 <div class="highlight"><pre><span></span><code>Authorization: Bearer &lt;token&gt;
 X-Guardrail-Tenant: &lt;workspace-id&gt;
 </code></pre></div>
 <p>Tokens are short-lived. Use the <code>/v1/auth/token</code> endpoint to exchange long-lived refresh tokens
 for access tokens when integrating with automation.</p>
-<h2 id="tenants">Tenants<a class="headerlink" href="#tenants" title="Permanent link">&para;</a></h2>
+<h2 id="decision-endpoints">Decision endpoints<a class="headerlink" href="#decision-endpoints" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1233,95 +1237,78 @@ for access tokens when integrating with automation.</p>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><code>GET</code></td>
-<td><code>/v1/tenants</code></td>
-<td>List organizations and workspaces visible to the caller.</td>
-</tr>
-<tr>
-<td><code>POST</code></td>
-<td><code>/v1/tenants</code></td>
-<td>Create a new workspace within the caller's organization.</td>
-</tr>
-<tr>
-<td><code>PATCH</code></td>
-<td><code>/v1/tenants/{workspace}</code></td>
-<td>Update metadata, notification channels, or runtime quotas.</td>
-</tr>
-<tr>
-<td><code>POST</code></td>
-<td><code>/v1/tenants/{workspace}/members</code></td>
-<td>Invite a member and assign an RBAC role.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="policy-packs">Policy packs<a class="headerlink" href="#policy-packs" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Endpoint</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>GET</code></td>
-<td><code>/v1/packs</code></td>
-<td>List available packs and their deployment status.</td>
-</tr>
-<tr>
-<td><code>POST</code></td>
-<td><code>/v1/packs/promote</code></td>
-<td>Promote a verified pack version into the selected workspace.</td>
-</tr>
-<tr>
-<td><code>POST</code></td>
-<td><code>/v1/packs/rollback</code></td>
-<td>Roll back to a previous pack version.</td>
-</tr>
-<tr>
-<td><code>GET</code></td>
-<td><code>/v1/packs/{pack}/history</code></td>
-<td>Retrieve promotion history and verifier evidence.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="runtime-operations">Runtime operations<a class="headerlink" href="#runtime-operations" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Endpoint</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>POST</code></td>
-<td><code>/v1/runtime/test</code></td>
-<td>Execute a dry-run prompt against the configured policies.</td>
-</tr>
 <tr>
 <td><code>POST</code></td>
 <td><code>/v1/runtime/invoke</code></td>
 <td>Submit a prompt for policy evaluation and model routing.</td>
 </tr>
 <tr>
+<td><code>POST</code></td>
+<td><code>/v1/runtime/test</code></td>
+<td>Execute a dry-run prompt against the configured policies.</td>
+</tr>
+<tr>
 <td><code>GET</code></td>
 <td><code>/v1/runtime/logs</code></td>
 <td>Stream decision logs for monitoring and troubleshooting.</td>
 </tr>
+</tbody>
+</table>
+<p>Responses include the headers <code>X-Guardrail-Decision</code>, <code>X-Guardrail-Mode</code>, and
+<code>X-Guardrail-Incident-ID</code> for correlation.</p>
+<h2 id="health-and-status-endpoints">Health and status endpoints<a class="headerlink" href="#health-and-status-endpoints" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
 <tr>
-<td><code>POST</code></td>
-<td><code>/v1/runtime/tokens</code></td>
-<td>Rotate API tokens for workspace applications.</td>
+<th>Method</th>
+<th>Endpoint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/healthz</code></td>
+<td>Liveness probe for the service container.</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/metrics</code></td>
+<td>Prometheus exposition for runtime counters and gauges.</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/openapi.json</code></td>
+<td>Published OpenAPI document for the running version.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="admin-and-usage-endpoints-core-160">Admin and usage endpoints (Core 1.6.0)<a class="headerlink" href="#admin-and-usage-endpoints-core-160" title="Permanent link">&para;</a></h2>
+<p>Core 1.6.0 introduces aggregated usage metrics consumed by the Enterprise Console.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Endpoint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/v1/admin/usage/summary</code></td>
+<td>Aggregated usage by tenant and period for billing.</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/v1/admin/usage/events</code></td>
+<td>Normalized decision events for audit and analytics.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="webhooks-and-events">Webhooks and events<a class="headerlink" href="#webhooks-and-events" title="Permanent link">&para;</a></h2>
-<p>Guardrail publishes structured events to your configured webhook endpoints. Events follow a
-JSON schema with the fields <code>type</code>, <code>tenant</code>, <code>timestamp</code>, and <code>payload</code>.</p>
+<p>Guardrail publishes structured events to your configured webhook endpoints. Events follow a JSON
+schema with the fields <code>type</code>, <code>tenant</code>, <code>timestamp</code>, and <code>payload</code>.</p>
 <p>Common event types include:</p>
 <ul>
 <li><code>policy.pack.promoted</code></li>
@@ -1332,8 +1319,8 @@ JSON schema with the fields <code>type</code>, <code>tenant</code>, <code>timest
 <p>Subscribe via the <code>/v1/events/subscriptions</code> endpoint and acknowledge deliveries to maintain a
 reliable feed.</p>
 <h2 id="rate-limiting-and-quotas">Rate limiting and quotas<a class="headerlink" href="#rate-limiting-and-quotas" title="Permanent link">&para;</a></h2>
-<p>The runtime enforces per-workspace rate limits. Default limits are suitable for testing and can
-be increased through the Admin UI or API. Requests exceeding the limit receive a <code>429 Too Many
+<p>The runtime enforces per-workspace rate limits. Default limits are suitable for testing and can be
+increased through the Admin UI or API. Requests exceeding the limit receive a <code>429 Too Many
 Requests</code> response with headers indicating when to retry.</p>
 <h2 id="error-handling">Error handling<a class="headerlink" href="#error-handling" title="Permanent link">&para;</a></h2>
 <p>Errors follow the RFC 7807 problem+json format. A sample error payload looks like:</p>
@@ -1345,8 +1332,8 @@ Requests</code> response with headers indicating when to retry.</p>
 <span class="w">  </span><span class="nt">&quot;instance&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123e4567-e89b-12d3-a456-426614174000&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Use the <code>instance</code> identifier when contacting support. It maps directly to decision logs stored
-in the event bus.</p>
+<p>Use the <code>instance</code> identifier when contacting support. It maps directly to decision logs stored in
+the event bus.</p>
 
 
 

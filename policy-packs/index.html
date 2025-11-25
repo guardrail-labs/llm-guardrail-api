@@ -667,10 +667,32 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#manifest-per-pack" class="md-nav__link">
+  <a href="#manifest-layout" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Manifest (per pack)
+        Manifest layout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loading-packs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loading packs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema validation
       
     </span>
   </a>
@@ -1049,10 +1071,32 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#manifest-per-pack" class="md-nav__link">
+  <a href="#manifest-layout" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Manifest (per pack)
+        Manifest layout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loading-packs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loading packs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema validation
       
     </span>
   </a>
@@ -1080,8 +1124,10 @@
 
 
 <h1 id="policy-packs-v100">Policy Packs (v1.0.0)<a class="headerlink" href="#policy-packs-v100" title="Permanent link">&para;</a></h1>
-<p>Policy packs declare compliance rules and metadata via a <strong>manifest</strong>. Packs are validated in CI.</p>
-<h2 id="manifest-per-pack">Manifest (per pack)<a class="headerlink" href="#manifest-per-pack" title="Permanent link">&para;</a></h2>
+<p>Policy packs are versioned bundles of guardrail rules, filters, and metadata. They are validated in
+CI and loaded by Guardrail Core to enforce safety and compliance requirements. Enterprise Console
+uses the same packs to drive approvals, usage views, and tenant-specific policy selection.</p>
+<h2 id="manifest-layout">Manifest layout<a class="headerlink" href="#manifest-layout" title="Permanent link">&para;</a></h2>
 <p><code>packs/&lt;pack&gt;/manifest.yaml</code>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;GDPR</span><span class="nv"> </span><span class="s">Core&quot;</span>
 <span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;gdpr&quot;</span>
@@ -1090,12 +1136,23 @@
 <span class="nt">status</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;stable&quot;</span><span class="w">     </span><span class="c1"># stable|beta|deprecated</span>
 <span class="nt">updated</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2025-11-11&quot;</span>
 <span class="nt">compat</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">core</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&gt;=1.5.0&quot;</span>
-<span class="w">  </span><span class="nt">enterprise</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&gt;=1.1.0&quot;</span>
+<span class="w">  </span><span class="nt">core</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&gt;=1.6.0&quot;</span>
+<span class="w">  </span><span class="nt">enterprise</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&gt;=1.5.0&quot;</span>
 <span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Baseline</span><span class="nv"> </span><span class="s">GDPR</span><span class="nv"> </span><span class="s">enforcement.&quot;</span>
 </code></pre></div></p>
-<p>Changelogs live in packs/<pack>/CHANGELOG.md.</p>
-<p>Validation tool: python tools/validate_packs.py.</p>
+<p>Manifests declare the pack identity, compatible runtime ranges, and publication status. Packs follow
+semantic versioning; increment major for breaking rule changes, minor for new rules, and patch for
+fixes.</p>
+<h2 id="loading-packs">Loading packs<a class="headerlink" href="#loading-packs" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Core:</strong> Install pack artifacts into the runtime using <code>guardrailctl</code> or the API. Core watches for
+  new versions and reloads policies without restart.</li>
+<li><strong>Enterprise:</strong> The Admin Console displays available packs, stages promotions, and records
+  approvals. It reads compatibility fields to ensure packs align with Core 1.6.0 deployments.</li>
+</ul>
+<h2 id="schema-validation">Schema validation<a class="headerlink" href="#schema-validation" title="Permanent link">&para;</a></h2>
+<p>Validation tooling (for example, <code>python tools/validate_packs.py</code>) enforces manifest presence and
+schema conformance before packs are published.</p>
 
 
 

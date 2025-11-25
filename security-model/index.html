@@ -10,13 +10,9 @@
       
       
       
-        <link rel="canonical" href="https://guardrail-labs.github.io/llm-guardrail-api/architecture/">
+        <link rel="canonical" href="https://guardrail-labs.github.io/llm-guardrail-api/security-model/">
       
       
-        <link rel="prev" href="../quickstart/">
-      
-      
-        <link rel="next" href="../tenants-and-rbac/">
       
       
         
@@ -27,7 +23,7 @@
     
     
       
-        <title>Overview - Guardrail API Docs</title>
+        <title>Clarify-First Blocking Model - Guardrail API Docs</title>
       
     
     
@@ -68,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#guardrail-architecture" class="md-skip">
+        <a href="#clarify-first-blocking-model" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Overview
+              Clarify-First Blocking Model
             
           </span>
         </div>
@@ -279,20 +275,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -313,7 +307,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -328,37 +322,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Overview
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
         
   
   
@@ -374,81 +341,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#runtime-services" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Runtime services
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#admin-experience" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Admin experience
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#policy-packs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Policy packs
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#release-verification" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Release verification
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#multi-repo-model" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Multi-repo model
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1086,69 +978,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#runtime-services" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Runtime services
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#admin-experience" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Admin experience
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#policy-packs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Policy packs
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#release-verification" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Release verification
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#multi-repo-model" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Multi-repo model
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1167,46 +996,14 @@
   
 
 
-<h1 id="guardrail-architecture">Guardrail Architecture<a class="headerlink" href="#guardrail-architecture" title="Permanent link">&para;</a></h1>
-<p>Guardrail API is designed as a modular control plane that mediates large language model requests,
-enforces policy, and produces audit evidence. The platform is composed of the following services
-and artifacts.</p>
-<h2 id="runtime-services">Runtime services<a class="headerlink" href="#runtime-services" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>API Gateway</strong> – receives inference or orchestration requests from client applications
-  and applies policy pack evaluations before forwarding prompts to upstream models.</li>
-<li><strong>Policy Engine</strong> – executes policy pack rules, drawing on tenant configuration, RBAC
-  assignments, and contextual metadata to determine allow, redact, or deny outcomes.</li>
-<li><strong>Event Bus</strong> – publishes structured decision logs that downstream observability systems
-  can consume for audit or analytics use cases.</li>
-<li><strong>Storage</strong> – persists policy pack definitions, tenant metadata, and verifier attestations.</li>
-</ul>
-<p>The Core runtime ships with reference Docker Compose and Helm assets so you can deploy the
-services to a local environment or production cluster. Enterprise customers receive hardened
-container images, FIPS-compliant builds, and extended observability integrations.</p>
-<h2 id="admin-experience">Admin experience<a class="headerlink" href="#admin-experience" title="Permanent link">&para;</a></h2>
-<p>The Admin UI provides a web-based front end. It connects to the same runtime services and is
-responsible for operations tasks such as tenant onboarding, role assignment, and policy pack
-publishing. The UI interacts with the API Gateway through authenticated service accounts and
-records every administrative action for compliance tracking.</p>
-<h2 id="policy-packs">Policy packs<a class="headerlink" href="#policy-packs" title="Permanent link">&para;</a></h2>
-<p>Policy packs are versioned bundles containing:</p>
-<ul>
-<li>Guardrail rules expressed in the Guardrail DSL.</li>
-<li>Prompt and response filters for offensive content, PII, or custom business policies.</li>
-<li>Metadata describing allowed deployment targets and dependencies.</li>
-</ul>
-<p>Packs are delivered through the Policy Pack repository or as private artifacts for Enterprise
-customers. They can be staged, promoted, and rolled back without redeploying the runtime.</p>
-<h2 id="release-verification">Release verification<a class="headerlink" href="#release-verification" title="Permanent link">&para;</a></h2>
-<p>The Verifier workflow validates every runtime and policy pack artifact. It checks the build
-provenance, verifies signed attestations, and ensures SBOMs are attached. Verified releases
-are eligible for promotion into regulated environments such as SOC 2 audited production
-clusters.</p>
-<h2 id="multi-repo-model">Multi-repo model<a class="headerlink" href="#multi-repo-model" title="Permanent link">&para;</a></h2>
-<p>The Guardrail platform intentionally splits code across repositories so each artifact can be
-versioned and governed independently. Review the <a href="../">Overview</a> page for a description of
-how this repository coordinates runtime, UI, verifier, and policy pack updates.</p>
+<h1 id="clarify-first-blocking-model">Clarify-First Blocking Model<a class="headerlink" href="#clarify-first-blocking-model" title="Permanent link">&para;</a></h1>
+<p>Guardrail evaluates every request with a clarify-first approach before allowing it to reach an
+LLM. Ingress classifiers look for ambiguous intent, policy conflicts, and safety risks. When a
+prompt is unclear, the request is routed to the Verifier Service for an assess-only review and
+returns a clarifying response, a block decision, or approval to continue.</p>
+<p>This flow keeps potentially unsafe prompts from executing while minimizing false positives. The
+same pattern applies to egress responses so redaction and filtering can remove sensitive content
+before it is delivered back to the caller.</p>
 
 
 
