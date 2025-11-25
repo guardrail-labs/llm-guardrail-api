@@ -41,11 +41,9 @@ The default roles ship with the Admin UI and CLI.
 
 ## Integrating with identity providers
 
-Enterprise deployments can connect to SAML, OIDC, or SCIM providers. Map IdP groups to the roles
-listed above to synchronize membership. Use just-in-time provisioning so that new teams can
-self-service workspace creation while still respecting approval workflows.
+External identity provider integration (e.g., SAML or OIDC) is planned but not part of this release.
 
 ## Auditing access
 
-All RBAC changes are written to the event bus with user, role, and timestamp metadata. Export the
-stream into your SIEM for long-term retention and to satisfy SOC 2 access-review controls.
+Guardrail records decision, clarification, and usage events.
+RBAC changes are not currently logged as audit events in this release.
