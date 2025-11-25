@@ -13,3 +13,6 @@ without running user-supplied code.
 
 **API**
 - `POST /verify` — assess-only request; returns allow/deny/clarify rationale.
+---
+
+**Guardrail Labs, LLC — Patent Pending**

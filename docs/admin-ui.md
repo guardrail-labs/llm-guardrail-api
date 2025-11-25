@@ -41,3 +41,6 @@ relevant views (traffic, clarifications, and tenants).
 The UI consumes the same public API documented in the [API Reference](api-reference.md). You can
 replicate any action programmatically if you need to integrate with existing ITSM tools or custom
 portals.
+---
+
+**Guardrail Labs, LLC — Patent Pending**

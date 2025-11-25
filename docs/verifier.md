@@ -28,3 +28,6 @@ executing user-supplied code.
 Monitor `verifier_requests_total` and `verifier_latency_seconds` metrics to track throughput and
 performance. Breaker state counters indicate when a provider has been taken out of rotation after a
 failure.
+---
+
+**Guardrail Labs, LLC — Patent Pending**

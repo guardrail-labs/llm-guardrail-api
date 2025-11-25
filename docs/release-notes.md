@@ -30,3 +30,6 @@ includes links to verifier evidence and policy pack compatibility notes.
 
 Refer to the Guardrail release calendar or the individual runtime repositories for more granular
 changelog entries.
+---
+
+**Guardrail Labs, LLC — Patent Pending**

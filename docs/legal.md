@@ -15,3 +15,6 @@ Certain features of the Guardrail API are the subject of one or more U.S. patent
 
 **Responsible Disclosure**  
 Report security issues to security@guardrailapi.com. We will acknowledge within 72 hours.
+---
+
+**Guardrail Labs, LLC — Patent Pending**

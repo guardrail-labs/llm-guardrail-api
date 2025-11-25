@@ -8,3 +8,6 @@ packages suitable for regulated environments.
 **Primary components:** Core Runtime, Enterprise Admin Console, Verifier Service, Policy Packs.
 
 For media/partnerships: contact@guardrailapi.com
+---
+
+**Guardrail Labs, LLC — Patent Pending**

@@ -14,3 +14,6 @@ To obtain an SBOM:
 2. Verify the signature with the published Guardrail keys.
 3. Extract the bundled CycloneDX document or generate a fresh one using the verifier when running in
    a private registry.
+---
+
+**Guardrail Labs, LLC — Patent Pending**

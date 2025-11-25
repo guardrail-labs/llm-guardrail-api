@@ -31,3 +31,6 @@ supply the expected headers.
 ## Verifier timeouts
 The Verifier fails closed. If a provider is down the breaker opens and requests fall back. Inspect
 `verifier_*` metrics for `breaker_open` counters.
+---
+
+**Guardrail Labs, LLC — Patent Pending**
