@@ -65,6 +65,7 @@ json
 ---
 
 ## 🧩 Core Features
+
 Dual-arm policy enforcement (prompts + responses)
 
 Configurable rules and evaluation profiles
@@ -84,6 +85,7 @@ Lightweight and production-ready
 ---
 
 ## 📚 Documentation
+
 Complete documentation for Guardrail API is available at:
 
 👉 https://guardrailapi.com/docs
