@@ -45,7 +45,7 @@ guardrail serve
 Send a decision request:
 
 ```bash
-Copy code
+
 curl -X POST http://localhost:8000/decision \
   -H "Content-Type: application/json" \
   -d '{
@@ -56,7 +56,7 @@ curl -X POST http://localhost:8000/decision \
 Example response:
 ```
 json
-Copy code
+
 {
   "allowed": false,
   "category": "unsafe_intent",
@@ -110,7 +110,7 @@ This is the authoritative source of truth for the Guardrail API.
 Clone and install:
 
 ```bash
-Copy code
+
 git clone https://github.com/guardrail-labs/llm-guardrail-api.git
 cd llm-guardrail-api
 pip install -e .
@@ -119,6 +119,7 @@ Run the test suite:
 
 ```bash
 pytest
+
 ```
 ---
 
