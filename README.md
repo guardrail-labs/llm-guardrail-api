@@ -45,7 +45,6 @@ guardrail serve
 Send a decision request:
 
 ```bash
-
 curl -X POST http://localhost:8000/decision \
   -H "Content-Type: application/json" \
   -d '{
@@ -110,7 +109,6 @@ This is the authoritative source of truth for the Guardrail API.
 Clone and install:
 
 ```bash
-
 git clone https://github.com/guardrail-labs/llm-guardrail-api.git
 cd llm-guardrail-api
 pip install -e .
@@ -119,7 +117,6 @@ Run the test suite:
 
 ```bash
 pytest
-
 ```
 ---
 
@@ -140,4 +137,5 @@ Our mission is to help organizations deploy AI responsibly — with transparency
 
 🛡 Guardrail API — Patent Pending
 
+---
 © Guardrail Labs, LLC. All rights reserved.
