@@ -1,180 +1,136 @@
-# Guardrail API — Umbrella Project
+# Guardrail API — Patent Pending  
+**Real-Time AI Firewall for Large Language Models**  
+Built and maintained by **Guardrail Labs, LLC**
 
-[![Docs](https://img.shields.io/badge/docs-live-blue)](https://guardrail-labs.github.io/llm-guardrail-api/)
-![Core](https://img.shields.io/badge/Core-1.6.0-green)
-![Enterprise](https://img.shields.io/badge/Enterprise-1.5.0-green)
-![Verifier](https://img.shields.io/badge/Verifier-0.2.0-green)
-![Policy Packs](https://img.shields.io/badge/Policy_Packs-1.0.0-green)
+Guardrail API is an open-source, real-time enforcement engine that protects your LLM applications by evaluating both **ingress (prompts)** and **egress (model responses)** for safety, misuse, and policy alignment.
 
-> **Guardrail Labs, LLC — Patent Pending**  
-> A unified platform for AI security, governance, and compliance.
+It is lightweight, deterministic, and provider-agnostic — compatible with OpenAI, Anthropic, Google, and all major model APIs.
 
 ---
 
-## 🧠 What is the Guardrail API?
+## 🔒 Why Guardrail API?
 
-Guardrail API is a **dual-arm AI security firewall** that sits between your applications
-and large language models (LLMs). It inspects and governs:
+Modern LLM applications face risks:
 
-- **Ingress** — prompts *entering* a model  
-- **Egress** — responses *leaving* a model  
+- Unsafe or high-risk prompts  
+- Jailbreak attempts and adversarial input  
+- Leaking sensitive or disallowed information  
+- Inconsistent or unpredictable safety filters  
+- Lack of auditability for compliance and governance  
 
-The system enforces policy packs, detects unsafe or ambiguous intent,
-and produces signed audit trails that support SOC 2, GDPR, HIPAA, and EU AI-Act alignment.
+Guardrail API solves this by acting as an **AI Firewall** that performs:
 
-This umbrella repository provides:
+- **Ingress evaluation** (before prompts reach the model)  
+- **Egress evaluation** (before responses hit the user)  
+- **Structured allow/deny decisions**  
+- **Explainable reasons and categories**  
+- **Strong audit evidence for SOC 2, GDPR, HIPAA, and AI-risk frameworks**
 
-- The **documentation portal**  
-- The **`guardrailctl` CLI**  
-- Deployment templates  
-- Integration guides  
-- Platform architecture documentation  
-
-All other Guardrail components plug into this umbrella.
-
----
-
-## 🧱 Platform Components
-
-Guardrail is delivered through four coordinated repositories maintained by
-Guardrail Labs:
-
-### **1. Core Runtime — `llm-guardrail-api-next` (Open Source)**  
-Dual-arm enforcement engine supporting:
-- multimodal ingress/egress evaluation  
-- policy pack execution  
-- clarify-first logic  
-- optional verifier integration  
-
-This is the foundation for all Guardrail deployments.
+Guardrail API is the foundation layer of the Guardrail ecosystem — security, safety, and governance built in from day one.
 
 ---
 
-### **2. Enterprise Runtime — `llm-guardrail-api-enterprise` (Proprietary)**  
-Adds governance, compliance, and operational controls, including:
-- multi-tenant administration  
-- RBAC  
-- retention and evidence bundles  
-- audit dashboards  
-- signed artifacts and SBOMs  
-- enhanced rate limiting / DLQ / quotas  
+## 🚀 Quickstart
 
-The evaluation engine matches Core; Enterprise extends operations and governance.
-
----
-
-### **3. Verifier Service — `guardrail-verifier` (Source-Available)**  
-A non-execution intent-classification microservice used when requests are
-ambiguous.  
-Supports:
-- modality-aware intent analysis  
-- clarify-first workflows  
-- policy-driven ambiguity handling  
-
-The Verifier never executes user-submitted content.
-
----
-
-### **4. Guardrail Policy Packs — `llm-guardrail-policy-packs` (Source-Available)**  
-Versioned, signed, auditable rule bundles containing:
-- safety categories  
-- modality rules (text/image/audio/file)  
-- regulatory profiles (GDPR, HIPAA, AI Act templates)  
-- organization-specific governance logic  
-
-Policy Packs define the rule surface the runtime enforces.
-
-
----
-
-## 📚 Documentation Portal
-
-The complete product documentation is available at:
-
-### **https://guardrail-labs.github.io/llm-guardrail-api/**
-
-It includes:
-
-- Installation guides for Core & Enterprise  
-- Architecture diagrams  
-- Clarifications + appeals workflow  
-- Admin UI tour  
-- Tenancy & RBAC  
-- Policy pack management  
-- Verifier integration  
-- SOC 2 evidence collection  
-- CLI reference  
-
-This portal is the recommended starting point for all users.
-
----
-
-## 🚀 Install the CLI
-
-Use `pipx` for an isolated installation:
+Install:
 
 ```bash
-pipx install git+https://github.com/guardrail-labs/llm-guardrail-api.git
+pip install llm-guardrail-api
 ```
+Run the API:
 
-Install locally while developing:
+```bash
+guardrail serve
 ```
-python -m pip install -U pip
+Send a decision request:
+
+```bash
+Copy code
+curl -X POST http://localhost:8000/decision \
+  -H "Content-Type: application/json" \
+  -d '{
+        "model": "gpt-4",
+        "ingress": { "text": "Write malware" }
+      }'
+```
+Example response:
+```
+json
+Copy code
+{
+  "allowed": false,
+  "category": "unsafe_intent",
+  "reason": "The request appears designed to produce harmful or malicious output."
+}
+```
+---
+🧩 Core Features
+Dual-arm policy enforcement (prompts + responses)
+
+Configurable rules and evaluation profiles
+
+Deterministic, explainable safety decisions
+
+Provider-agnostic design
+
+Streaming-safe enforcement
+
+FastAPI + Python runtime
+
+Structured incident reporting
+
+Lightweight and production-ready
+---
+📚 Documentation
+Complete documentation for Guardrail API is available at:
+
+👉 https://guardrailapi.com/docs
+
+You’ll find:
+
+Core concepts
+
+API reference
+
+Prompt/response evaluation examples
+
+Deployment guidance
+
+Integration patterns
+
+Decision model details
+
+This is the authoritative source of truth for the Guardrail API.
+---
+🛠 Developer Setup
+Clone and install:
+
+```bash
+Copy code
+git clone https://github.com/guardrail-labs/llm-guardrail-api.git
+cd llm-guardrail-api
 pip install -e .
+```
+Run the test suite:
 
-```
-
-## 🔧 Common guardrailctl Commands
-
-List channels and verify releases (Core example)
-```
-guardrailctl channels list
-guardrailctl verify --edition core --tag v1.5.0
-```
-
-Install a component to a target directory
-```
-guardrailctl install --edition core --tag v1.5.0 --dest /opt/guardrail
-```
-
-Generate deployment assets
-```
-guardrailctl compose init --dest /opt/guardrail
-mkdir -p manifests
-guardrailctl helm render --out ./manifests
+```bash
+pytest
 ```
 ---
-## Version Matrix
+📄 License
+Guardrail API (Core Runtime) is licensed under the Apache 2.0 License.
 
-| Component                  | Version | License Type                           | Notes                                      |
-|---------------------------|---------|-----------------------------------------|--------------------------------------------|
-| Core Runtime              | 1.6.0   | Apache 2.0 (Open Source)                | Dual-arm mediation engine                  |
-| Enterprise Runtime        | 1.5.0   | Proprietary (Commercial)                | Governance, multi-tenancy, admin console   |
-| Verifier Service          | 0.2.0   | Proprietary (Source-Available)          | Non-execution intent classification        |
-| Policy Packs              | 1.0.0   | Proprietary (Source-Available)          | Governance + safety rule bundles           |
-| Umbrella / CLI            | (latest) | MIT (Open Source)                       | Deployment tooling + docs portal           |
-
+This applies only to the open-source core.
+Other Guardrail Labs components and policy packs may carry different license terms.
 ---
+🏢 About Guardrail Labs, LLC
+Guardrail Labs, LLC builds security, safety, and risk-governance infrastructure for AI systems in enterprise environments.
+Our mission is to help organizations deploy AI responsibly — with transparency, auditability, and real-time protection.
 
-## 🏛 Licensing Model
+🌐 Website: https://guardrailapi.com
 
-| Component                 | License Type                          | Notes |
-|---------------------------|----------------------------------------|-------|
-| **Umbrella Docs & CLI**   | MIT License                            | Public and open; docs + `guardrailctl` tooling |
-| **Core Runtime**          | Apache 2.0                             | Open source; dual-arm enforcement engine |
-| **Verifier Service**      | Proprietary (Guardrail Labs License)   | Source-available; non-execution ambiguity classifier |
-| **Policy Packs**          | Proprietary (Guardrail Labs License)   | Source-available; signed rule bundles and templates |
-| **Enterprise Runtime**    | Proprietary (Guardrail Labs License)   | Governance, RBAC, Admin UI, retention, evidence bundles |
+📧 info@guardrailapi.com
 
----
+🛡 Guardrail API — Patent Pending
 
-## 🛡 About Guardrail Labs
-Guardrail Labs builds AI security, safety, and governance infrastructure.
-Our mission is to help teams deploy AI responsibly — with transparency,
-accountability, and compliance built in.
-
-To learn more or contact us:
-enterprise@guardrailapi.com
-security@guardrailapi.com
-
-© Guardrail Labs LLC 2025. All rights reserved.
+© Guardrail Labs, LLC. All rights reserved.
