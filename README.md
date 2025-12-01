@@ -64,23 +64,16 @@ json
 ```
 ---
 
-## 🧩 Core Features
+## 🧪 Core Features
 
-Dual-arm policy enforcement (prompts + responses)
-
-Configurable rules and evaluation profiles
-
-Deterministic, explainable safety decisions
-
-Provider-agnostic design
-
-Streaming-safe enforcement
-
-FastAPI + Python runtime
-
-Structured incident reporting
-
-Lightweight and production-ready
+- Dual-arm policy enforcement (prompts + responses)
+- Configurable rules and evaluation profiles
+- Deterministic, explainable safety decisions
+- Provider-agnostic design
+- Streaming-safe enforcement
+- FastAPI + Python runtime
+- Structured incident reporting
+- Lightweight and production-ready
 
 ---
 
