@@ -64,7 +64,7 @@ Copy code
 }
 ```
 ---
-🧩 Core Features
+## 🧩 Core Features
 Dual-arm policy enforcement (prompts + responses)
 
 Configurable rules and evaluation profiles
@@ -81,7 +81,7 @@ Structured incident reporting
 
 Lightweight and production-ready
 ---
-📚 Documentation
+## 📚 Documentation
 Complete documentation for Guardrail API is available at:
 
 👉 https://guardrailapi.com/docs
@@ -117,13 +117,13 @@ Run the test suite:
 pytest
 ```
 ---
-📄 License
+## 📄 License
 Guardrail API (Core Runtime) is licensed under the Apache 2.0 License.
 
 This applies only to the open-source core.
 Other Guardrail Labs components and policy packs may carry different license terms.
 ---
-🏢 About Guardrail Labs, LLC
+## 🏢 About Guardrail Labs, LLC
 Guardrail Labs, LLC builds security, safety, and risk-governance infrastructure for AI systems in enterprise environments.
 Our mission is to help organizations deploy AI responsibly — with transparency, auditability, and real-time protection.
 
