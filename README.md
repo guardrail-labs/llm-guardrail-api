@@ -92,19 +92,16 @@ Complete documentation for Guardrail API is available at:
 
 You’ll find:
 
-Core concepts
+- Core concepts  
+- API reference  
+- Prompt/response evaluation examples  
+- Deployment guidance  
+- Integration patterns  
+- Decision model details  
 
-API reference
+---
 
-Prompt/response evaluation examples
-
-Deployment guidance
-
-Integration patterns
-
-Decision model details
-
-This is the authoritative source of truth for the Guardrail API.
+### This is the authoritative source of truth for the Guardrail API.
 
 ---
 🛠 Developer Setup
