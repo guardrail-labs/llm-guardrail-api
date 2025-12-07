@@ -9,6 +9,19 @@ It is lightweight, deterministic, and provider-agnostic — compatible with Open
 ---
 
 ## 🔒 Why Guardrail API?
+---
+
+## 🧩 Guardrail Ecosystem Versions
+
+This repository contains the open-source Guardrail Core Runtime.
+
+Related components maintained by Guardrail Labs:
+
+- **Guardrail Core Runtime:** `1.6.0`
+- **Guardrail Console UI:** `1.6.0`
+- **Enterprise Policy Packs:** versioned separately
+
+---
 
 Modern LLM applications face risks:
 
